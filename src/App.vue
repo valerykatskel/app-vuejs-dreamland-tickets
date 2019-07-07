@@ -270,6 +270,9 @@
 					this.priceAdultWeekday = ticket.priceAdultWeekday;
 					this.priceChildWeekday = ticket.priceChildWeekday;
 				}
+				if (ticket.refName === 'ticketType04') {
+					this.validText = `Весь день ${this.getRangeDate(ticket.ticketValidDuration)}`;
+				}
 			},
 
 			getRangeDate (daysRange) {
