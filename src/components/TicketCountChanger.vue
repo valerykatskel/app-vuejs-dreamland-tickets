@@ -16,7 +16,14 @@ export default {
 
     ticketCount: {
       type: Number
-    }
+    },
+
+    // activeTicket: {
+    //   type: Object
+    // }
+    ticketPrice: {
+      type: Number
+    },
   },
 
   data: function() {
@@ -107,7 +114,13 @@ export default {
       if (this.kindOfTicket === "childWeekday") {
         eventEmitter.$emit("changeChildWeekday", newValue);
       }
-    }
+    },
+  },
+
+  mounted: function() {
+    this.$nextTick(function() {
+      //this.ticketPrice
+    });
   }
 };
 </script>
@@ -115,7 +128,11 @@ export default {
 <template>
   <div class="number-wrapper">
     <fieldset class="choise-number">
-      <button class="reduce" @click="reduceCount(1)" type="button">
+      <button 
+        class="reduce" 
+        @click="reduceCount(1)" 
+        type="button"
+      >
         <img :src="iconMinus" alt="-" />
       </button>
 
@@ -132,13 +149,17 @@ export default {
         @input="console.log('enter new value')"
       />
 
-      <button class="enhance" @click="increaseCount(1)" type="button">
+      <button 
+        class="enhance" 
+        @click="increaseCount(1)" 
+        type="button"
+      >
         <img :src="iconPlus" alt="+" />
       </button>
     </fieldset>
     <p class="price-descr">
       <span class="price">
-        <strong>{{ ticketCount }}</strong> руб.
+        <strong>{{ this.ticketPrice }}</strong> руб.
       </span>
     </p>
   </div>

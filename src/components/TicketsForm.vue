@@ -89,6 +89,12 @@ export default {
       return this.countAdultWeekday > 0 || this.countChildWeekday > 0
         ? "disabled"
         : "";
+    },
+
+    activeTicket() {
+      return this.tickets.filter(
+        ticket => ticket.refName === this.ticketTypeRef
+      )[0];
     }
   }
 };
@@ -147,7 +153,11 @@ export default {
               <div class="number-title">
                 <div class="kind-of-day" v-if="this.showKindOfDay">Любой день</div>Взрослый билет
               </div>
-              <ticket-count-changer :ticketCount="countAdult" kindOfTicket="adult"></ticket-count-changer>
+              <ticket-count-changer
+                :ticketCount="countAdult"
+                :activeTicket="activeTicket"
+                kindOfTicket="adult"
+              ></ticket-count-changer>
 
               <div v-if="!this.showVipBlock" class="number-title">
                 Детский билет
@@ -156,6 +166,7 @@ export default {
               <ticket-count-changer
                 v-if="!this.showVipBlock"
                 :ticketCount="countChild"
+                :activeTicket="activeTicket"
                 kindOfTicket="child"
               ></ticket-count-changer>
 
@@ -183,13 +194,21 @@ export default {
             <div class="number-title">
               <div class="kind-of-day" v-if="this.showKindOfDay">Будний день</div>Взрослый билет
             </div>
-            <ticket-count-changer :ticketCount="countAdultWeekday" kindOfTicket="adultWeekday"></ticket-count-changer>
+            <ticket-count-changer
+              :ticketCount="countAdultWeekday"
+              :activeTicket="activeTicket"
+              kindOfTicket="adultWeekday"
+            ></ticket-count-changer>
 
             <div class="number-title">
               Детский билет
               <span>(3-16 лет)</span>
             </div>
-            <ticket-count-changer :ticketCount="countChildWeekday" kindOfTicket="childWeekday"></ticket-count-changer>
+            <ticket-count-changer
+              :ticketCount="countChildWeekday"
+              :activeTicket="activeTicket"
+              kindOfTicket="childWeekday"
+            ></ticket-count-changer>
           </td>
         </tr>
       </table>
