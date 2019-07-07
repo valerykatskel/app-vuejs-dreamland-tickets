@@ -169,11 +169,8 @@ export default {
       </table>
       <table
         class="choise-ticket m-weekday"
-        :class="[
-                this.lockWeekday ? 'disabled' : '', 
-                isWeekdayHidden ? 'hidden' : ''
-            ]
-        "
+        :class="this.lockWeekday ? 'disabled' : ''"
+        v-if="!this.isWeekdayHidden"
       >
         <tr>
           <td class="td-number">
