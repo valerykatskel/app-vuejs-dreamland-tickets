@@ -73,10 +73,6 @@ body {
   background: #fff;
 }
 
-.booking-form-wrapper .booking-form .choise-ticket.m-weekday.hidden {
-  display: none;
-}
-
 .booking-form-wrapper .booking-form .choise-ticket.disabled {
   opacity: 0.5;
 }
@@ -289,10 +285,6 @@ body {
   background-color: #00c1ff;
 }
 
-.choise-ticket-wrapper .ticket-icon-03 .choise-ticket.m-weekday {
-  display: table;
-}
-
 .choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close) .deg-value,
 .choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close) .ticket-description,
 .choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close):hover .deg-value,
@@ -302,7 +294,7 @@ body {
   color: #fff;
 }
 
-.choise-ticket-wrapper .ticket-icon-03 .choise-ticket.m-weekday {
+.choise-ticket-wrapper .choise-ticket.m-weekday {
   border-top: 1px solid #e5e5e5;
   padding-top: 40px;
 }
