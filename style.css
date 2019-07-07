@@ -1,0 +1,829 @@
+body {
+  color: #000;
+  background: none;
+}
+
+.go-back-button {
+  display: none;
+}
+
+.booking-form-wrapper {
+  background: none;
+  padding: 0;
+}
+
+.booking-form-wrapper .remove-item {
+  top: 10px;
+  background: #F0F2F3;
+  text-transform: uppercase;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+  height: 30px;
+}
+
+.booking-form-wrapper .button.button--with-icon {
+  font-size: 11px;
+  color: #808080;
+  background: #F0F2F3;
+  text-transform: uppercase;
+  padding: 0 15px;
+  width: auto;
+  height: 30px;
+  line-height: 1;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.booking-form-wrapper .button.button--with-icon img {
+  margin-right: 6px;
+  vertical-align: sub;
+  width: 12px;
+  height: 12px;
+}
+
+.booking-form-wrapper .button.button--with-icon:disabled {
+  cursor: default;
+}
+
+.booking-form-wrapper .button.button--with-icon:hover {
+  background: #f9f9f9;
+}
+
+.booking-form-wrapper .button.button--with-icon:focus,
+.booking-form-wrapper .button.button--with-icon:active {
+  background-color: #e6e6e6;
+}
+
+.booking-form-wrapper .remove-item span {
+  display: inline-block;
+  margin-left: 6px;
+}
+
+
+.booking-form-wrapper .timer-counter-place {
+  background-color: #f2f2f2;
+  margin: -32px -32px 0;
+  padding: 20px;
+}
+
+.booking-form-wrapper .booking-form {
+  padding: 0;
+  background: #fff;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket.m-weekday.hidden {
+  display: none;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket.disabled {
+  opacity: 0.5;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket {
+  margin-top: 40px;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket td.td-number,
+.booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .price-descr {
+  text-align: left;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper {
+  overflow: inherit;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .price-descr {
+  color: #000;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .price-descr .price {
+  font-size: 32px;
+  font-family: "Arial Black", Arial;
+  font-weight: 900;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .price-descr .price strong {
+  font-size: 30px;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket td {
+  vertical-align: top;
+}
+
+
+
+
+
+.booking-form-wrapper .ticket-view .right-decor:before,
+.booking-form-wrapper .ticket-view .left-decor:before {
+  background-color: #fff;
+}
+
+.b-choise-ticket {
+  display: flex;
+  margin-top: 48px;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.booking-form-wrapper .booking-form>div fieldset {
+  border: none;
+}
+
+.booking-form-wrapper .booking-form>div fieldset h1 {
+  margin-top: 35px;
+}
+
+.booking-form-wrapper .booking-form>div fieldset h1+p {
+  color: #000;
+}
+
+.number-title .kind-of-day {
+  display: block;
+  float: right;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #f21822;
+  font-size: 15px;
+}
+
+.number-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-right: 15px;
+  color: #000;
+  font-size: 21px;
+}
+
+.number-title span {
+  font-size: 15px;
+  line-height: 1;
+  display: inline-block;
+  width: 100%;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.number-wrapper+.number-title {
+  margin-top: 40px;
+}
+
+.booking-form-wrapper .submit .button[disabled],
+.booking-form-wrapper .submit .button[disabled]:hover {
+  background-color: #00c1ff;
+}
+
+.booking-form-wrapper .choise-number input[type=number] {
+  color: #000;
+  font-size: 30px;
+  font-family: "Arial Black", Arial;
+  font-weight: 900;
+}
+
+.booking-form-wrapper .choise-number button:hover {
+  background-color: #f9f9f9;
+}
+
+.booking-form-wrapper .choise-number button:focus,
+.booking-form-wrapper .choise-number button:active {
+  border: none;
+  background-color: #e6e6e6;
+}
+
+.booking-form-wrapper .ticket-view .ticket-content {
+  display: inline-block;
+  margin: -20px -32px 0 -32px;
+  padding: 17px 0px 0 0px;
+  cursor: pointer;
+  width: 100%;
+  min-height: 450px;
+}
+
+.booking-form-wrapper .ticket-view .ticket-content .ticket-price {
+  text-align: left;
+  font-size: 25px;
+  line-height: 52px;
+  margin-bottom: 5px;
+  margin-top: 7px;
+  font-family: "Arial Black", Arial;
+  font-weight: 900;
+  position: absolute;
+  bottom: 0;
+}
+
+.booking-form-wrapper .ticket-view .ticket-content .ticket-description {
+  color: #808080;
+  font-size: 15px;
+  line-height: 25px;
+  width: 180px;
+  margin: 0 auto 0 auto;
+}
+
+.booking-form-wrapper .ticket-view.ticket-icon-03 .ticket-content .ticket-description {
+  width: 100%;
+  display: inline-block;
+}
+
+.booking-form-wrapper .ticket-view .ticket-content .ticket-title {
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 33px;
+  text-align: left;
+  height: 38px;
+}
+
+.booking-form-wrapper .ticket-view {
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.25);
+  color: #000;
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  min-width: 233px;
+  cursor: pointer;
+}
+
+.booking-form-wrapper .ticket-view.label-sold .ticket-content,
+.booking-form-wrapper .ticket-view.label-close .ticket-content {
+  cursor: default;
+}
+
+.booking-form-wrapper .ticket-view.label-sold .ticket-content,
+.booking-form-wrapper .ticket-view.label-close .ticket-content {
+  opacity: .2;
+}
+
+/* TICKET TYPES TABS  START*/
+#ticketType01,
+#ticketType02,
+#ticketType03 {
+  display: none;
+}
+
+.ticket-icon {
+  width: 100%;
+  height: 105px;
+  background-repeat: no-repeat;
+  background-position: 100%;
+  margin-top: 23px;
+}
+
+.choise-ticket-wrapper .ticket-view {
+  background-color: #fff;
+}
+
+.choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close),
+.choise-ticket-wrapper .ticket-view:not(.label-sold):not(.label-close):hover {
+  background-color: #00c1ff;
+  color: #fff;
+}
+
+.choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close) .ticket-price,
+.choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close) .ticket-title,
+.choise-ticket-wrapper .ticket-view:not(.label-sold):not(.label-close):hover .ticket-price,
+.choise-ticket-wrapper .ticket-view:not(.label-sold):not(.label-close):hover .ticket-title {
+  color: #000;
+  background-color: #00c1ff;
+}
+
+.choise-ticket-wrapper .ticket-icon-03 .choise-ticket.m-weekday {
+  display: table;
+}
+
+.choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close) .deg-value,
+.choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close) .ticket-description,
+.choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close):hover .deg-value,
+.choise-ticket-wrapper .ticket-view.active:not(.label-sold):not(.label-close):hover .ticket-description,
+.choise-ticket-wrapper .ticket-view:not(.label-sold):not(.label-close):hover .deg-value,
+.choise-ticket-wrapper .ticket-view:not(.label-sold):not(.label-close):hover .ticket-description {
+  color: #fff;
+}
+
+.choise-ticket-wrapper .ticket-icon-03 .choise-ticket.m-weekday {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 40px;
+}
+
+
+
+/* TICKET TYPES TABS  START*/
+
+
+.booking-form-wrapper .ticket-view .left-decor,
+.booking-form-wrapper .ticket-view .right-decor {
+  border-color: #fff
+}
+
+.booking-form-wrapper .ticket-view .left-decor,
+.booking-form-wrapper .ticket-view .right-decor {
+  border: none;
+}
+
+.booking-form-wrapper .ticket-view p.name {
+  color: #fff;
+}
+
+.booking-form-wrapper .choise-number button:disabled {
+  background-color: #F0F2F3;
+}
+
+.booking-form-wrapper .choise-number button {
+  background-color: #F0F2F3;
+  padding: 0 10px;
+  border-radius: 3px;
+}
+
+.booking-form-wrapper .choise-number button img {
+  vertical-align: middle;
+  display: block;
+}
+
+
+.booking-form-wrapper .booking-form>div~fieldset {
+  position: relative;
+  border-top: 0 none;
+  padding-top: 35px;
+}
+
+.booking-form-wrapper .booking-form>div~fieldset:before {
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  width: 100%;
+  background: #e5e5e5;
+}
+
+.booking-form-wrapper .user-data th,
+.booking-form-wrapper .user-data td {
+  padding-left: 0;
+}
+
+.booking-form-wrapper .user-data td {
+  padding-left: 5px;
+}
+
+.booking-form-wrapper .user-data th input:placeholder-shown,
+.booking-form-wrapper .user-data td input:placeholder-shown {
+  background-color: #F0F2F3;
+  border-radius: 3px;
+  border-color: #F0F2F3;
+  padding-left: 18px;
+  font-size: 13px;
+  height: 50px;
+}
+
+.booking-form-wrapper .user-data th input,
+.booking-form-wrapper .user-data td input {
+  height: 50px;
+}
+
+.booking-form-wrapper .user-data td .checkbox-agree .checkbox:checked+.checkbox-custom::before {
+  background: transparent url('data:image/png;base64,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') center no-repeat;
+}
+
+.booking-form-wrapper .user-data td .checkbox-agree .checkbox-custom,
+.booking-form-wrapper .user-data td input {
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.booking-form-wrapper .user-data td input:focus {
+  border: 1px solid #1ebcee;
+}
+
+.user-data td,
+.booking-form-wrapper .booking-form>.user-data-wrapper,
+.booking-form-wrapper .booking-form fieldset.submit-wrapper {
+  margin-left: -5px;
+  margin-right: 0;
+  padding-left: 5px;
+  padding-right: 0;
+  text-align: left;
+}
+
+.booking-form-wrapper .booking-form>fieldset.submit-wrapper {
+  padding-top: 10px;
+}
+
+.user-data label {
+  color: #000;
+  font-size: 15px;
+  font-family: Arial;
+}
+
+.user-data label.checkbox-agree {
+  margin-left: 0;
+  margin-top: 4px;
+}
+
+.booking-form-wrapper .user-data {
+  max-width: 600px;
+  margin-bottom: 33px;
+}
+
+.user-data td,
+.booking-form-wrapper .booking-form>.user-data-wrapper p {
+  color: #808080;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.booking-form-wrapper .booking-form>.user-data-wrapper p {
+  line-height: 20px;
+  margin-top: -15px;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket td.td-name {
+  vertical-align: top;
+  width: 270px;
+}
+
+.ticket-total-info {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.ticket-total-info .row .title {
+  width: 135px;
+  width: 135px;
+  display: inline-block;
+  line-height: 28px;
+  font-size: 15px;
+}
+
+.booking-form-wrapper .submit .ticket-total-info .tickets-count+.tickets-price {
+  margin-top: 28px;
+}
+
+.ticket-total-info .tickets-price .row .title {
+  line-height: 35px;
+}
+
+.ticket-total-info .tickets-count,
+.ticket-total-info .tickets-price {
+  color: #1a1a1a;
+}
+
+.ticket-total-info .tickets-count {
+  font-size: 17px;
+}
+
+.ticket-total-info .tickets-price {
+  font-size: 26px;
+  margin-top: 10px;
+  font-weight: bold;
+  line-height: 25px;
+}
+
+.ticket-total-info .tickets-price .title {
+  font-weight: normal;
+  font-size: 21px;
+}
+
+.ticket-total-info .tickets-price .title,
+.ticket-total-info .tickets-count .title {
+  color: #808080;
+}
+
+.ticket-total-info .tickets-count .tickets-count__valid span {
+  color: #f21822;
+  text-transform: uppercase;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket-wrapper {
+  padding-top: 0;
+  text-align: left;
+  overflow: hidden;
+  padding-bottom: 40px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.booking-form-wrapper .booking-form .choise-ticket-wrapper h1 {
+  padding: 0 0 0 20px;
+  font-size: 31px;
+  line-height: 35px;
+  color: #000;
+}
+
+.choise-ticket-comment {
+  color: #808080;
+  font-size: 15px;
+  font-family: Verdana;
+  margin-top: 31px;
+  text-transform: uppercase;
+  padding: 0 0 0 20px;
+}
+
+.booking-form-wrapper .booking-form.success .remove-item {
+  height: auto;
+  margin-top: 10px;
+  right: 15px;
+  padding: 10px;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper,
+.booking-form-wrapper .booking-form.success .choise-ticket-wrapper h1,
+.booking-form-wrapper .booking-form.success .choise-ticket-wrapper .choise-ticket-comment,
+.booking-form-wrapper .booking-form.success .choise-ticket-wrapper .submit-wrapper {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper {
+  padding-top: 0;
+  border-top: 1px solid #e5e5e5;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper .submit .ticket-total-info .ticket-info-description .red {
+  color: #f21822;
+  text-transform: uppercase;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper .submit .ticket-total-info .tickets-count+.tickets-price {
+  margin-top: 13px;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper .b-phone img {
+  width: 27px;
+  height: 27px;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper .b-phone p span {
+  margin-right: 10px;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper .b-phone {
+  margin-top: 30px;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 20px;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper .submit .ticket-total-info {
+  margin-top: 1px;
+}
+
+.booking-form-wrapper .booking-form.success .submit-wrapper .submit .ticket-total-info .row .title {
+  width: 155px;
+}
+
+.booking-form-wrapper .booking-form.success {
+  padding: 0 15px;
+}
+
+.booking-form-wrapper .booking-form.success .choise-ticket-wrapper .choise-ticket-comment {
+  margin-top: 12px;
+  font-size: 17px;
+  font-family: Arial;
+  color: #000;
+}
+
+.booking-form-wrapper .booking-form.success .choise-ticket-wrapper h1 {
+  margin-top: 13px;
+  letter-spacing: -0.5px;
+}
+
+.booking-form-wrapper .booking-form.success .choise-ticket-wrapper {
+  padding-bottom: 37px;
+}
+
+.booking-form-wrapper .booking-form.success .submit {
+  display: block;
+}
+
+.booking-form-wrapper .booking-form.success .choise-ticket-wrapper .choise-ticket-comment {
+  text-transform: initial;
+}
+
+.vdp-datepicker {
+  color: #000;
+  float: left;
+}
+
+.vdp-datepicker+.td-number-inner {
+  float: left;
+  margin-left: 60px;
+  margin-top: 10px;
+}
+
+.vdp-datepicker__calendar .cell {
+  border-radius: 50%;
+}
+
+.vdp-datepicker__calendar .cell:nth-child(7n+6),
+.vdp-datepicker__calendar .cell:nth-child(7n+7) {
+  color: red;
+  font-weight: bold;
+}
+
+.vdp-datepicker__calendar .cell.disabled:nth-child(7n+6),
+.vdp-datepicker__calendar .cell.disabled:nth-child(7n+7) {
+  color: #ffd3d3;
+}
+
+.vdp-datepicker__calendar .cell.selected {
+  background-color: #dce0e4 !important;
+  font-weight: bold;
+}
+
+.vdp-datepicker__calendar {
+  border: none !important;
+}
+
+@media (max-width: 740px) {
+  .booking-form-wrapper .booking-form div fieldset h1 {
+    font-size: 20px;
+  }
+}
+
+/* submit block start */
+.booking-form-wrapper .booking-form fieldset.submit-wrapper p,
+.booking-form-wrapper .booking-form fieldset.submit-wrapper p a {
+  color: #808080;
+  font-size: 13px;
+}
+
+.booking-form-wrapper .booking-form fieldset.submit-wrapper p.result {
+  color: #666666;
+}
+
+.submit .ticket-total-info {
+  margin-top: 2px;
+}
+
+.booking-form-wrapper .submit .button {
+  background: #00c1ff;
+}
+
+.booking-form-wrapper .submit .button:hover {
+  background: #38cfff;
+}
+
+.booking-form-wrapper .submit .button:active,
+.booking-form-wrapper .submit .button:focus {
+  background: #00a5ff;
+}
+
+.booking-form-wrapper .submit .button {
+  width: 100%;
+  min-width: 100%;
+}
+
+.booking-form-wrapper .submit .ticket-total-info {
+  text-align: left;
+}
+
+.booking-form-wrapper .submit .ticket-total-info+.button {
+  margin-top: 20px;
+}
+
+.booking-form-wrapper .booking-form fieldset.submit-wrapper p span {
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.booking-form-wrapper .booking-form fieldset.submit-wrapper p a {
+  padding-left: 0;
+  margin-left: 0;
+  display: inline-block;
+}
+
+/* submit block end */
+
+
+@media (min-width: 658px) {
+
+  .booking-form-wrapper .booking-form .td-number .number-wrapper .price-descr,
+  .booking-form-wrapper .booking-form .td-number .number-wrapper .choise-number {
+    float: left;
+  }
+
+  .booking-form-wrapper .booking-form .td-number .number-title {
+    width: 100%;
+    float: left;
+  }
+
+  .user-data td,
+  .booking-form-wrapper .booking-form>.user-data-wrapper,
+  .booking-form-wrapper .booking-form fieldset.submit-wrapper {
+    padding-left: 45px;
+  }
+
+  .user-data td,
+  .booking-form-wrapper .booking-form>.user-data-wrapper,
+  .booking-form-wrapper .booking-form fieldset.submit-wrapper {
+    padding-top: 16px;
+  }
+
+  /* submit block start */
+  .booking-form-wrapper .submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 32px;
+    padding-right: 30px;
+  }
+
+  .booking-form-wrapper .user-data th,
+  .booking-form-wrapper .user-data td {
+    padding-bottom: 20px;
+  }
+
+  .booking-form-wrapper .submit .button {
+    width: auto;
+  }
+
+  .booking-form-wrapper .submit .ticket-total-info+.button {
+    margin-top: 0;
+    margin-left: 35px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .booking-form-wrapper .booking-form fieldset.submit-wrapper p {
+    text-align: left;
+  }
+
+  .booking-form-wrapper .booking-form fieldset.submit-wrapper p a {
+    padding: 0;
+  }
+
+  .booking-form-wrapper .submit .button {
+    min-width: 285px;
+  }
+
+  /* submit block end */
+  .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .choise-number {
+    margin-left: 0;
+    float: left;
+    margin-right: 20px;
+  }
+
+  .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .price-descr {
+    text-align: left;
+    color: #000;
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+  }
+
+  .booking-form-wrapper .booking-form .choise-ticket td.td-number {
+    padding-left: 40px;
+  }
+
+  .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-title {
+    color: #000;
+    font-size: 21px;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .b-choise-ticket {
+    flex-direction: column;
+  }
+
+  .booking-form-wrapper .booking-form .choise-ticket-wrapper h1,
+  .choise-ticket-comment {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .choise-ticket-comment {
+    height: 30px;
+  }
+
+  .go-back-button {
+    display: none;
+  }
+
+  .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-title {
+    padding-right: 5px;
+  }
+
+  .goback .choise-ticket-comment {
+    text-align: right;
+  }
+
+  .goback .choise-ticket-comment .ticket-comment__text {
+    display: none;
+  }
+
+  .goback .go-back-button {
+    display: inline-block;
+  }
+
+  .booking-form-wrapper .ticket-view {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 10px;
+  }
+}
