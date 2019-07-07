@@ -136,7 +136,6 @@ export default {
       >
         <tr>
           <td class="td-number">
-            <input type="hidden" id="selectVIPDate" />
             <datepicker
               :disabled-dates="disabledDates"
               name="ticketStartDate"
@@ -144,7 +143,6 @@ export default {
               :value="this.ticketDateStart"
               :language="ru"
               :monday-first="true"
-              id="selectVIPDate"
               v-if="this.showVipBlock"
               @selected="handleSelectVIPDate"
             ></datepicker>
