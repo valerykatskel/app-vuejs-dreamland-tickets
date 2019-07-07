@@ -15,7 +15,7 @@
 				degValue: 21,                                           // значение в градусах для типа "Динамическая цена"
 				description: '<span>Билет&nbsp;действителен</span> весь&nbsp;день&nbsp;<strong>{date}</strong> в&nbsp;день&nbsp;покупки&nbsp;билета', // плейсхолден {date} при рендеринге будет заменен на текущую дату
 				activeByDefault: false,																	// указываем, какой тип билета активне (выбран) при загрузке страницы	
-				ticketValidDuration: 1,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1		
+				ticketValidDuration: 1,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1	
 			},
 
 			{
@@ -28,7 +28,7 @@
 				degValue: 0,                                            // для типов, отличных от "Динамическая цена", значение градусов равно нулю
 				description: 'Выбор даты. Доставка билетов, Вип парковка. Место в Вип зоне. Приветственный коктейль. Катание на горках без очереди!',
 				activeByDefault: true,																	// указываем, какой тип билета активне (выбран) при загрузке страницы	
-				ticketValidDuration: 1,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1
+				ticketValidDuration: 1,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1	
 			},
 
 			{
@@ -56,7 +56,7 @@
 				degValue: 0,                                            // для типов, отличных от "Динамическая цена", значение градусов равно нулю
 				description: '<span>Билет&nbsp;действителен</span> <strong>3&nbsp;дня</strong> с&nbsp;момента&nbsp;покупки',
 				activeByDefault: false,																	// указываем, какой тип билета активне (выбран) при загрузке страницы	
-				ticketValidDuration: 3,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1
+				ticketValidDuration: 3,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1	
 			},
 		]
   };
@@ -73,16 +73,20 @@
 		priceChildWeekday: 0,                       // цена детского билета в будний для типа билетов "Весь день"
 		ticketType: null,                           // текстовое название типа билета
 		ticketTypeRef: null,                        // id типа билета
-		validText: '',								// текст, в котором описываеются условия, при которых билет действителен
-		email: '',									// храним адрес электронной почты покупателя билета в форме покупки
-		userName: '',								// храним имя покупателя билета в форме покупки
-		phone: '',									// храним номер телефона покупателя билета в форме покупки
-		agree: '',									// храним значение чекбокса "Согласен" в форме покупки
-    isWaterParkClosed: false,					// признак того, что аквапарк закрыт сегодня
+		validText: '',															// текст, в котором описываеются условия, при которых билет действителен
+		email: '',																	// храним адрес электронной почты покупателя билета в форме покупки
+		userName: '',																// храним имя покупателя билета в форме покупки
+		phone: '',																	// храним номер телефона покупателя билета в форме покупки
+		agree: '',																	// храним значение чекбокса "Согласен" в форме покупки
+    isWaterParkClosed: false,										// признак того, что аквапарк закрыт сегодня
     iconClear: './dist/assets/images/icon-clear.svg',
 		iconQuestion: './dist/assets/images/icon-question.svg',
 		supportPhone: '+375 (29) 000-00-00',
-		ticketDateStart: new Date(),				// дата покупки билета
+		ticketDateStart: new Date(),								// дата покупки билета,
+		labelAnyDay: 'Любой день',
+		labelWeekday: 'Будний день',			
+		deliveryOption: false,											// Возможна ли доставка выбранного типа билета? Доступно лишь для билетов типа VIP, для остальных этот параметр будет всегда false
+		deliveryOptionPrice: 10, 										// Цена за доставку билетов
 	};
 
   export default {
@@ -104,34 +108,39 @@
 			})
       
       eventEmitter.$on('buttonClickedGoBack', () => {
+				// Слушатель события клика по кнопке "К выбору билета"
 				this.clearAllPrices();
 				this.ticketTypeRef = null;
 				this.ticketType = null; 
 				this.clearAllActiveClasses();
 			})
 
-    	eventEmitter.$on('ticketChangeAdult', count => {
+    	eventEmitter.$on('changeAdult', count => {
+				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества взрослых билетов
+				console.log(`change countAdult from child`);
 				this.countAdult = count;
+				this.setLabelTextForAnyDay();
 			})
 
-      eventEmitter.$on('ticketChangeChild', count => {
+    	eventEmitter.$on('changeAdultWeekday', count => {
+				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества взрослых билетов в будний день
+				console.log(`change countAdultWeekday from child`);
+				this.countAdultWeekday = count;
+				this.setLabelTextForWeekday();
+			})
+
+      eventEmitter.$on('changeChild', count => {
+				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества детских билетов
+				console.log(`change countChild from child`);
 				this.countChild = count;
+				this.setLabelTextForAnyDay();
 			})
 
-			eventEmitter.$on('ticketAddAdult', type => {
-				this.addTicketAdult(type);
-			})
-
-      eventEmitter.$on('ticketAddChild', type => {
-				this.addTicketChild(type);
-			})
-
-      eventEmitter.$on('ticketRemoveAdult', type => {
-				this.removeTicketAdult(type);
-			})
-
-      eventEmitter.$on('ticketRemoveChild', type => {
-				this.removeTicketChild(type);
+      eventEmitter.$on('changeChildWeekday', count => {
+				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества детских билетов в будний день
+				console.log(`change countChildWeekday from child`);
+				this.countChildWeekday = count;
+				this.setLabelTextForWeekday();
 			})
     },
     
@@ -165,48 +174,10 @@
 		},
 
 		methods: {
-			addTicketAdult (type) {
-				if (type === 'usual') {
-					this.countAdult += 1;
-					// для типа билета "Весь день"
-					if (this.ticketTypeRef === 'ticketType03') this.validText = '<span>Любой день</span>';
-				}
-
-				if (type === 'weekday') {
-					this.countAdultWeekday += 1;
-					// для типа билета "Весь день"
-					if (this.ticketTypeRef === 'ticketType03') this.validText = '<span>Будний день</span>';
-				}
-			},
-
-			addTicketChild (type) {
-				if (type === 'usual') {
-					this.countChild += 1;
-					// для типа билета "Весь день"
-					if (this.ticketTypeRef === 'ticketType03') this.validText = '<span>Любой день</span>';
-				}
-
-				if (type === 'weekday') {
-					this.countChildWeekday += 1;
-					// для типа билета "Весь день"
-					if (this.ticketTypeRef === 'ticketType03') this.validText = '<span>Будний день</span>';
-				}
-			},
-
 			clearAllActiveClasses () {
 				this.tickets.map(ticket => {
 					ticket.activeByDefault = false;
 				})
-			},
-
-			removeTicketAdult (type) {
-				if (type === 'usual') this.countAdult - 1 >= 0 ? this.countAdult -= 1 : '';
-				if (type === 'weekday') this.countAdultWeekday - 1 >= 0 ? this.countAdultWeekday -= 1 : '';
-			},
-
-			removeTicketChild (type) {
-				if (type === 'usual') this.countChild - 1 >= 0 ? this.countChild -= 1 : '';
-				if (type === 'weekday') this.countChildWeekday - 1 >= 0 ? this.countChildWeekday -= 1 : '';
 			},
 
 			handleChangeTicketType (e) {
@@ -337,6 +308,14 @@
 				const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 				return monthNames[id];
 			},
+
+			setLabelTextForAnyDay () {
+				if (this.ticketTypeRef === 'ticketType03') this.validText = `<span>${this.labelAnyDay}</span>`;
+			},
+
+			setLabelTextForWeekday () {
+				if (this.ticketTypeRef === 'ticketType03') this.validText = `<span>${this.labelWeekday}</span>`;
+			}			
 		},
 
 		computed: {
@@ -361,14 +340,6 @@
 		
 			countAdultTotal () {
 				return parseInt(this.countAdult, 10) + parseInt(this.countAdultWeekday, 10);
-			},
-		
-			lockWeekday () {
-				return this.countAdult > 0 || this.countChild > 0;
-			},
-		
-			lockUsualDay () {
-				return this.countAdultWeekday > 0 || this.countChildWeekday > 0;
 			},
 		
 			isSmartMode () {
@@ -401,6 +372,11 @@
 
 			supportPhoneLink () {
 				return 'tel:' + this.supportPhone.split(' ').join('');
+			},
+
+			showVipBlock () {
+				// Вычисляемое свойство показывает, нужно ли показывать блок для типа билетов VIP
+				return this.ticketTypeRef === 'ticketType04';
 			}
 		}
   }
@@ -418,8 +394,6 @@
         :ticketTypeRef="ticketTypeRef"
         :isSmartMode="isSmartMode"
         :getRangeDate="getRangeDate"
-        :lockWeekday="lockWeekday"
-        :lockUsualDay="lockUsualDay"
         :countAdult="countAdult"
         :countAdultWeekday="countAdultWeekday"
         :countChild="countChild"
@@ -427,6 +401,8 @@
         :changeTicketStartDate="changeTicketStartDate"
         :ticketDateStart="ticketDateStart"
         :formatDate="formatDate"
+				:showVipBlock="showVipBlock"
+				:deliveryOption="deliveryOption"
       ></tickets-form>
 
       <fieldset class="user-data-wrapper" :class="totalCount === 0 ? 'hidden' : ''">
@@ -548,7 +524,7 @@
                   <strong v-html="validText"></strong>
                 </span>
               </div>
-              <div class="row">
+              <div class="row" v-if="!showVipBlock">
                 <span class="title">Детских</span>
                 <span class="tickets-count__child">
                   <strong>{{ countChildTotal }}</strong>

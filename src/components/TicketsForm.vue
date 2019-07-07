@@ -7,23 +7,27 @@ import { ru } from "vuejs-datepicker/src/locale";
 import { eventEmitter } from "../main";
 
 export default {
-  props: [
-    "tickets",
-    "countAdult",
-    "countAdultWeekday",
-    "countChild",
-    "countChildWeekday",
-    "isWaterParkClosed",
-    "ticketType",
-    "ticketTypeRef",
-    "isSmartMode",
-    "getRangeDate",
-    "lockWeekday",
-    "lockUsualDay",
-    "changeTicketStartDate",
-    "ticketDateStart",
-    "formatDate"
-  ],
+  props: {
+    tickets: {},
+    countAdult: {},
+    countAdultWeekday: {},
+    countChild: {},
+    countChildWeekday: {},
+    isWaterParkClosed: {},
+    ticketType: {},
+    ticketTypeRef: {},
+    isSmartMode: {},
+    getRangeDate: {},
+    changeTicketStartDate: {},
+    ticketDateStart: {},
+    formatDate: {},
+    showVipBlock: {
+      type: Boolean
+    },
+    deliveryOption: {
+      type: Boolean
+    }
+  },
   data: function() {
     return {
       title: "Быстрая покупка билета в аквапарк «Дримлэнд»",
@@ -46,10 +50,6 @@ export default {
           return true;
         } else return false;
       } else return true;
-    },
-
-    showVipBlock(ticketTypeRef) {
-      return ticketTypeRef === "ticketType04";
     },
 
     handleClickGoBack() {
@@ -77,6 +77,18 @@ export default {
 
     showKindOfDay() {
       return this.ticketTypeRef === "ticketType03";
+    },
+
+    addClassDisabledForWeekdaySection() {
+      // Вычисляемое свойство добавляет класс disabled для секции с выбором количества билетов "Будний день", если добавлен хотя бы один билет в секции "Любой день".
+      return this.countAdult > 0 || this.countChild > 0 ? "disabled" : "";
+    },
+
+    addClassDisabledForUsualDaySection() {
+      // Вычисляемое свойство добавляет класс disabled для секции с выбором количества билетов "Любой день", если добавлен хотя бы один билет в секции "Будний день".
+      return this.countAdultWeekday > 0 || this.countChildWeekday > 0
+        ? "disabled"
+        : "";
     }
   }
 };
@@ -112,9 +124,9 @@ export default {
       ></tickets-list>
 
       <table
-        class="choise-ticket"
-        :class="this.lockUsualDay ? 'disabled' : ''"
         v-if="this.showChoiseTicket(isSmartMode, ticketTypeRef)"
+        class="choise-ticket"
+        :class="this.addClassDisabledForUsualDaySection"
       >
         <tr>
           <td class="td-number">
@@ -127,7 +139,7 @@ export default {
               :language="ru"
               :monday-first="true"
               id="selectVIPDate"
-              v-if="showVipBlock(ticketTypeRef)"
+              v-if="this.showVipBlock"
               @selected="handleSelectVIPDate"
             ></datepicker>
 
@@ -135,31 +147,24 @@ export default {
               <div class="number-title">
                 <div class="kind-of-day" v-if="this.showKindOfDay">Любой день</div>Взрослый билет
               </div>
-              <ticket-count-changer
-                :lockUsualDay="lockUsualDay"
-                :countAdult="countAdult"
-                :ticketCount="countAdult"
-                kindOfTicket="adult"
-              ></ticket-count-changer>
+              <ticket-count-changer :ticketCount="countAdult" kindOfTicket="adult"></ticket-count-changer>
 
-              <div v-if="!showVipBlock(ticketTypeRef)" class="number-title">
+              <div v-if="!this.showVipBlock" class="number-title">
                 Детский билет
                 <span>(3-16 лет)</span>
               </div>
               <ticket-count-changer
-                v-if="!showVipBlock(ticketTypeRef)"
-                :lockUsualDay="lockUsualDay"
-                :countChild="countChild"
+                v-if="!this.showVipBlock"
                 :ticketCount="countChild"
                 kindOfTicket="child"
               ></ticket-count-changer>
 
-              <div
-                v-if="showVipBlock(ticketTypeRef)"
-                class="number-title block-vip"
-              >{{ deliveryOptionText }}</div>
+              <div v-if="this.showVipBlock" class="number-title block-vip">
+                <input v-model="this.deliveryOption" type="checkbox" />
+                {{ deliveryOptionText }}
+              </div>
 
-              <div v-if="showVipBlock(ticketTypeRef)" class="number-wrapper block-vip">
+              <div v-if="this.showVipBlock" class="number-wrapper block-vip">
                 <p>Подарочный вариант</p>
                 <p>C вами свяжется наш менеджер</p>
               </div>
@@ -167,33 +172,24 @@ export default {
           </td>
         </tr>
       </table>
+
       <table
-        class="choise-ticket m-weekday"
-        :class="this.lockWeekday ? 'disabled' : ''"
         v-if="!this.isWeekdayHidden"
+        class="choise-ticket m-weekday"
+        :class="this.addClassDisabledForWeekdaySection"
       >
         <tr>
           <td class="td-number">
             <div class="number-title">
               <div class="kind-of-day" v-if="this.showKindOfDay">Будний день</div>Взрослый билет
             </div>
-            <ticket-count-changer
-              :lockUsualDay="lockUsualDay"
-              :countAdultWeekday="countAdultWeekday"
-              :ticketCount="countAdultWeekday"
-              kindOfTicket="adultWeekday"
-            ></ticket-count-changer>
+            <ticket-count-changer :ticketCount="countAdultWeekday" kindOfTicket="adultWeekday"></ticket-count-changer>
 
             <div class="number-title">
               Детский билет
               <span>(3-16 лет)</span>
             </div>
-            <ticket-count-changer
-              :lockUsualDay="lockUsualDay"
-              :countChildWeekday="countChildWeekday"
-              :ticketCount="countChildWeekday"
-              kindOfTicket="childWeekday"
-            ></ticket-count-changer>
+            <ticket-count-changer :ticketCount="countChildWeekday" kindOfTicket="childWeekday"></ticket-count-changer>
           </td>
         </tr>
       </table>
