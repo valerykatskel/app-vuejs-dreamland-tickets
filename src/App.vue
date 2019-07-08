@@ -368,7 +368,12 @@
   <div class="booking-form-wrapper">
     <form action class="booking-form" :class="ticketType !== null ? 'goback' : ''">
       <input type="hidden" id="ticketType" name="ticket-type" v-model="ticketType" />
-
+      <input type="hidden" id="countAdult" name="count-adult" v-model="countAdult" />
+      <input type="hidden" id="countAdultWeekday" name="count-adult-weekday" v-model="countAdultWeekday" />
+      <input type="hidden" id="countChild" name="count-child" v-model="countChild" />
+      <input type="hidden" id="countChildWeekday" name="count-child-weekday" v-model="countChildWeekday" />
+      <input type="hidden" id="ticketDateStart" name="ticket-date-start" v-model="ticketDateStart" />
+      <input type="hidden" id="deliveryOption" name="delivery-option" v-model="deliveryOption" />
       <tickets-form
         :tickets="tickets"
         :isWaterParkClosed="isWaterParkClosed"
