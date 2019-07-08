@@ -21,7 +21,7 @@ export default {
     // activeTicket: {
     //   type: Object
     // }
-    ticketPrice: {
+    price: {
       type: Number
     },
   },
@@ -159,7 +159,7 @@ export default {
     </fieldset>
     <p class="price-descr">
       <span class="price">
-        <strong>{{ this.ticketPrice }}</strong> руб.
+        <strong>{{ this.price }}</strong> руб.
       </span>
     </p>
   </div>

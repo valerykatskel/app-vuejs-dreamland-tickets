@@ -26,6 +26,18 @@ export default {
     },
     deliveryOption: {
       type: Boolean
+    },
+    priceAdult: {
+      type: Number
+    },
+    priceAdultWeekday: {
+      type: Number
+    },
+    priceChild: {
+      type: Number
+    },
+    priceChildWeekday: {
+      type: Number
     }
   },
   data: function() {
@@ -59,13 +71,18 @@ export default {
 
     handleSelectVIPDate(date) {
       this.changeTicketStartDate(date);
-    }
+    },
+
+    handleDeliveryOptionChange(data) {
+      eventEmitter.$emit('checkboxDeliveryOptionChange', data);
+    },
   },
   components: {
     datepicker: Datepicker,
     ticketsList: TicketsList,
     ticketCountChanger: TicketCountChanger
   },
+
   computed: {
     isWeekdayHidden() {
       return (
@@ -90,12 +107,6 @@ export default {
         ? "disabled"
         : "";
     },
-
-    activeTicket() {
-      return this.tickets.filter(
-        ticket => ticket.refName === this.ticketTypeRef
-      )[0];
-    }
   }
 };
 </script>
@@ -153,7 +164,7 @@ export default {
               </div>
               <ticket-count-changer
                 :ticketCount="countAdult"
-                :activeTicket="activeTicket"
+                :price="priceAdult"
                 kindOfTicket="adult"
               ></ticket-count-changer>
 
@@ -164,12 +175,16 @@ export default {
               <ticket-count-changer
                 v-if="!this.showVipBlock"
                 :ticketCount="countChild"
-                :activeTicket="activeTicket"
+                :price="priceChild"
                 kindOfTicket="child"
               ></ticket-count-changer>
 
               <div v-if="this.showVipBlock" class="number-title block-vip">
-                <input v-model="this.deliveryOption" type="checkbox" />
+                <input 
+                  :checked="this.deliveryOption" 
+                  type="checkbox"
+                  @click="handleDeliveryOptionChange" 
+                />
                 {{ deliveryOptionText }}
               </div>
 
@@ -194,7 +209,7 @@ export default {
             </div>
             <ticket-count-changer
               :ticketCount="countAdultWeekday"
-              :activeTicket="activeTicket"
+              :price="priceAdultWeekday"
               kindOfTicket="adultWeekday"
             ></ticket-count-changer>
 
@@ -204,7 +219,7 @@ export default {
             </div>
             <ticket-count-changer
               :ticketCount="countChildWeekday"
-              :activeTicket="activeTicket"
+              :price="priceChildWeekday"
               kindOfTicket="childWeekday"
             ></ticket-count-changer>
           </td>

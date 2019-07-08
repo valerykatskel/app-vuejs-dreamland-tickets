@@ -142,6 +142,11 @@
 				this.countChildWeekday = count;
 				this.setLabelTextForWeekday();
 			})
+
+      eventEmitter.$on('checkboxDeliveryOptionChange', data => {
+				// Слушатель события клика по чекбоксу "Доставка (10 руб.)"
+				this.deliveryOption = data.target.checked;
+			})
     },
     
 		mounted: function() {
@@ -172,7 +177,7 @@
 				window.removeEventListener('resize', this.ajustParentIframeHeight)
 			}
 		},
-
+				
 		methods: {
 			clearAllActiveClasses () {
 				this.tickets.map(ticket => {
@@ -258,6 +263,7 @@
 			},
 
 			updateTicketValidText (ticket) {
+				// Метод обновляет значение для переменной, в которой хранится текст о сроке действия билета выбранного типа
 				if (ticket.refName === 'ticketType01') {
 					this.validText = `Весь день ${this.getRangeDate(ticket.ticketValidDuration)}`;
 				}
@@ -276,8 +282,7 @@
 			},
 
 			getRangeDate (daysRange) {
-				const dateStartMonth = this.ticketDateStart.getMonth();
-				const monthStart = this.getMonthNameById(dateStartMonth);
+				const monthStart = this.getMonthNameById(this.ticketDateStart.getMonth());
 				
 				// если билет действителен только сегодня, то в параметре передается 0
 				if (daysRange > 1) {
@@ -286,13 +291,13 @@
 					const dateEndMonth = dateEnd.getMonth();
 					const monthEnd = this.getMonthNameById(dateEnd.getMonth());
 
-					if (dateStartMonth === dateEndMonth) {
+					if (this.ticketDateStart.getMonth() === dateEndMonth) {
 						return `${this.ticketDateStart.getDate()}-${dateEnd.getDate()} ${monthStart}`;
 					} else {
 						return `${this.ticketDateStart.getDate()} ${monthStart} - ${dateEnd.getDate()} ${monthEnd}`;
 					}
 				} else {
-					return `${this.ticketDateStart.getDate()} ${monthStart}`;
+					return this.formatDate(new Date());
 				}
 			},
 			
@@ -318,7 +323,7 @@
 
 			setLabelTextForWeekday () {
 				if (this.ticketTypeRef === 'ticketType03') this.validText = `<span>${this.labelWeekday}</span>`;
-			}			
+			},		
 		},
 
 		computed: {
@@ -327,10 +332,17 @@
 			},
 		
 			showTicketTotalPrice () {
-				return parseInt(this.priceAdult, 10) * this.countAdult
+				let totalPrice = parseInt(this.priceAdult, 10) * this.countAdult
 					+ parseInt(this.priceChild, 10) * this.countChild
 					+ parseInt(this.priceAdultWeekday, 10) * this.countAdultWeekday
 					+ parseInt(this.priceChildWeekday, 10) * this.countChildWeekday;
+
+				// Для билетов типа VIP нужно в общую стоимость учесть также и стоимость доставки, если она выбрана
+				if (this.ticketTypeRef === 'ticketType04' && this.deliveryOption) {
+					totalPrice += this.deliveryOptionPrice;
+				}
+				
+				return totalPrice;
 			},
 		
 			isUserDataValid () {
@@ -380,7 +392,7 @@
 			showVipBlock () {
 				// Вычисляемое свойство показывает, нужно ли показывать блок для типа билетов VIP
 				return this.ticketTypeRef === 'ticketType04';
-			}
+			},
 		}
   }
 </script>
@@ -406,6 +418,10 @@
         :formatDate="formatDate"
 				:showVipBlock="showVipBlock"
 				:deliveryOption="deliveryOption"
+				:priceAdult="priceAdult"
+				:priceAdultWeekday="priceAdultWeekday"
+				:priceChild="priceChild"
+				:priceChildWeekday="priceChildWeekday"
       ></tickets-form>
 
       <fieldset class="user-data-wrapper" :class="totalCount === 0 ? 'hidden' : ''">
