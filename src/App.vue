@@ -212,9 +212,8 @@
 			},
 
 			ajustParentIframeHeight () {
-				//TODO
-				//debugger
-				//parent.document.body.getElementById('booking-iframe').style.height = document.body.height();
+        let appHeight = document.body.clientHeight;
+				parent.document.getElementById('booking-iframe').setAttribute('style',`height:${appHeight}px`);
 			},
 
 			getActiveTicketInformation (refName) {
