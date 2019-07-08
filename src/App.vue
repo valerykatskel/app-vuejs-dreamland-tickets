@@ -1,94 +1,7 @@
 <script>
 	import TicketsForm from './components/TicketsForm.vue';
 	import { eventEmitter } from './main';
-
-	// объект настроек для отображения каждого типа билета
-	const ticketsData = {
-		tickets: [
-			{
-				refName: 'ticketType01',                                // реф для связи с нужным radio button, для безджаваскриптового переключчения "табов" с помощью css
-				count: 1,                                               // если количество доступных билетов равно нулю, то появляется "растяжка" Продано http://joxi.ru/Vm6VZxKT4EKn8m  
-				priceAdult: 21,                                         // стоимость взрослого билета
-				priceChild: 13,                                         // стоимость детского билета
-				classList: 'ticket-icon-01 label-best',                 // класс иконки (тип "Динамическая цена") для css + "растяжка" Лучшая цена, которая всегда показывается для типа Динамическая цена
-				title: 'Динамическая цена',                             // название типа билета
-				degValue: 21,                                           // значение в градусах для типа "Динамическая цена"
-				description: '<span>Билет&nbsp;действителен</span> весь&nbsp;день&nbsp;<strong>{date}</strong> в&nbsp;день&nbsp;покупки&nbsp;билета', // плейсхолден {date} при рендеринге будет заменен на текущую дату
-				activeByDefault: false,																	// указываем, какой тип билета активне (выбран) при загрузке страницы	
-				ticketValidDuration: 1,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1	
-			},
-
-			{
-				refName: 'ticketType04',                                // реф для связи с нужным radio button, для безджаваскриптового переключчения "табов" с помощью css
-				count: 1,                                               // если количество доступных билетов равно нулю, то появляется "растяжка" Продано http://joxi.ru/Vm6VZxKT4EKn8m  
-				priceAdult: 60,                                         // стоимость взрослого билета
-				priceChild: 0,                                          // стоимость детского билета для типа билетов VIP отстутствует со слов Вовы
-				classList: 'ticket-icon-04',                            // класс иконки (тип "Пол дня") для css
-				title: 'VIP',	                                        	// название типа билета
-				degValue: 0,                                            // для типов, отличных от "Динамическая цена", значение градусов равно нулю
-				description: 'Выбор даты. Доставка билетов, Вип парковка. Место в Вип зоне. Приветственный коктейль. Катание на горках без очереди!',
-				activeByDefault: true,																	// указываем, какой тип билета активне (выбран) при загрузке страницы	
-				ticketValidDuration: 1,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1	
-			},
-
-			{
-				refName: 'ticketType02',                                // реф для связи с нужным radio button, для безджаваскриптового переключчения "табов" с помощью css
-				count: 1,                                               // если количество доступных билетов равно нулю, то появляется "растяжка" Продано http://joxi.ru/Vm6VZxKT4EKn8m  
-				priceAdult: 18,                                         // стоимость взрослого билета
-				priceChild: 9,                                          // стоимость детского билета
-				classList: 'ticket-icon-02',                            // класс иконки (тип "Пол дня") для css
-				title: 'Пол дня',                                       // название типа билета
-				degValue: 0,                                            // для типов, отличных от "Динамическая цена", значение градусов равно нулю
-				description: '<span>Билет&nbsp;действителен</span> после <strong>16:00</strong> в&nbsp;день&nbsp;покупки&nbsp;билета',
-				activeByDefault: false,																	// указываем, какой тип билета активне (выбран) при загрузке страницы	
-				ticketValidDuration: 1,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1
-			},
-
-			{
-				refName: 'ticketType03',                                // реф для связи с нужным radio button, для безджаваскриптового переключчения "табов" с помощью css
-				count: 1,                                               // если количество доступных билетов равно нулю, то появляется "растяжка" Продано http://joxi.ru/Vm6VZxKT4EKn8m 
-				priceAdult: 25,                                         // стоимость взрослого билета в ЛЮБОЙ день
-				priceChild: 14,                                         // стоимость детского билета в ЛЮБОЙ день
-				priceAdultWeekday: 30,                                  // стоимость взрослого билета в БУДНИЙ день
-				priceChildWeekday: 16,                                  // стоимость детского билета в БУДНИЙ день
-				classList: 'ticket-icon-03',                            // класс иконки (тип "Весь день") для css
-				title: 'Весь день',                                     // название типа билета
-				degValue: 0,                                            // для типов, отличных от "Динамическая цена", значение градусов равно нулю
-				description: '<span>Билет&nbsp;действителен</span> <strong>3&nbsp;дня</strong> с&nbsp;момента&nbsp;покупки',
-				activeByDefault: false,																	// указываем, какой тип билета активне (выбран) при загрузке страницы	
-				ticketValidDuration: 3,																	// указываем, сколько дней действителен билет, если только сегодня, то указываем 1	
-			},
-		]
-  };
   
-  // объект данных приложения
-  const appData = {
-		countAdult: 0,                              // кол-во взрослых билетов в любой день
-		countAdultWeekday: 0,                       // кол-во взрослых билетов в БУДНИЙ день
-		countChild: 0,                              // кол-во детских билетов в любой день
-		countChildWeekday: 0,                       // кол-во детских билетов в БУДНИЙ день
-		priceAdult: 0,                              // цена взрослого билета в любой день для типа билетов "Весь день" и цена взрослого билета для остальных типов билетов
-		priceChild: 0,                              // цена детского билета в любой день для типа билетов "Весь день" и цена детского билета для остальных типов билетов
-		priceAdultWeekday: 0,                       // цена взрослого билета в будний день для типа билетов "Весь день"
-		priceChildWeekday: 0,                       // цена детского билета в будний для типа билетов "Весь день"
-		ticketType: null,                           // текстовое название типа билета
-		ticketTypeRef: null,                        // id типа билета
-		validText: '',															// текст, в котором описываеются условия, при которых билет действителен
-		email: '',																	// храним адрес электронной почты покупателя билета в форме покупки
-		userName: '',																// храним имя покупателя билета в форме покупки
-		phone: '',																	// храним номер телефона покупателя билета в форме покупки
-		agree: '',																	// храним значение чекбокса "Согласен" в форме покупки
-    isWaterParkClosed: false,										// признак того, что аквапарк закрыт сегодня
-    iconClear: require("./assets/images/icon-clear.svg"),
-		iconQuestion: require("./assets/images/icon-question.svg"),
-		supportPhone: '+375 (29) 000-00-00',
-		ticketDateStart: new Date(),								// дата покупки билета,
-		labelAnyDay: 'Любой день',
-		labelWeekday: 'Будний день',			
-		deliveryOption: false,											// Возможна ли доставка выбранного типа билета? Доступно лишь для билетов типа VIP, для остальных этот параметр будет всегда false
-		deliveryOptionPrice: 10, 										// Цена за доставку билетов
-	};
-
   export default {
 		name: 'app',
 		
@@ -97,10 +10,39 @@
     },
 
     data: function() {
-			return {...appData, ...ticketsData};
+			return {
+        tickets: [],
+        countAdult: 0,                              // кол-во взрослых билетов в любой день
+        countAdultWeekday: 0,                       // кол-во взрослых билетов в БУДНИЙ день
+        countChild: 0,                              // кол-во детских билетов в любой день
+        countChildWeekday: 0,                       // кол-во детских билетов в БУДНИЙ день
+        priceAdult: 0,                              // цена взрослого билета в любой день для типа билетов "Весь день" и цена взрослого билета для остальных типов билетов
+        priceChild: 0,                              // цена детского билета в любой день для типа билетов "Весь день" и цена детского билета для остальных типов билетов
+        priceAdultWeekday: 0,                       // цена взрослого билета в будний день для типа билетов "Весь день"
+        priceChildWeekday: 0,                       // цена детского билета в будний для типа билетов "Весь день"
+        ticketType: null,                           // текстовое название типа билета
+        ticketTypeRef: null,                        // id типа билета
+        validText: '',															// текст, в котором описываеются условия, при которых билет действителен
+        email: '',																	// храним адрес электронной почты покупателя билета в форме покупки
+        userName: '',																// храним имя покупателя билета в форме покупки
+        phone: '',																	// храним номер телефона покупателя билета в форме покупки
+        agree: '',																	// храним значение чекбокса "Согласен" в форме покупки
+        isWaterParkClosed: false,										// признак того, что аквапарк закрыт сегодня
+        iconClear: require("./assets/images/icon-clear.svg"),
+        iconQuestion: require("./assets/images/icon-question.svg"),
+        supportPhone: '+375 (29) 000-00-00',
+        ticketDateStart: new Date(),								// дата покупки билета,
+        labelAnyDay: 'Любой день',
+        labelWeekday: 'Будний день',			
+        deliveryOption: false,											// Возможна ли доставка выбранного типа билета? Доступно лишь для билетов типа VIP, для остальных этот параметр будет всегда false
+        deliveryOptionPrice: 10, 										// Цена за доставку билетов
+      };
     },
-    
+
 		created: function() {
+      this.applyUserOptions();
+
+
 			if (this.isSmartMode) {
 				document.body.classList.add('smart')
 			}
@@ -233,26 +175,25 @@
 						activeTicket = this.tickets.filter(function (ticket) {return ticket.activeByDefault})[0];
 					}
 				} else {
-					// если для выбранного типа билетов все билеты проданы или
-					// если аквапарт закрыт в этот день, то ничего не переключаем и оставляем выбранным предыдущий тип билетов
-					if (!!this.tickets.filter(ticket => { return ticket.refName === refName && ticket.count }).length && !this.isWaterParkClosed) {
-						this.tickets.map(ticket => {
-							// удалим класс active с текущего активного типа билета (со всех)
-							// дополнительная проверка, если тип билета, на который кликнули в статусе Продано или Закрыто, 
-							// то оставляем активным предыдущий тип билетов
-							if (!!ticket.count && !self.isWaterParkClosed) {
-								ticket.activeByDefault = false;
-							}
-							// устанавливаем класс active на тот, по которому кликнули, за исключением ситуаций,
-							// когда Продано или Закрыто
-							if (ticket.refName === refName) {
-								if (!!ticket.count) {
-									ticket.activeByDefault = true;
-									activeTicket = ticket;
-								}
-							}
-						});
-					}
+          // Если аквапарк закрыт и мы кликаем по билету Динамическая цена, то ничего не делаем.
+          if (this.isWaterParkClosed && refName === 'ticketType01') {
+            return
+          } else {
+            this.tickets.map(ticket => {
+              // удалим класс active с текущего активного типа билета (со всех)
+              // дополнительная проверка, если тип билета, на который кликнули в статусе Продано или Закрыто, 
+              // то оставляем активным предыдущий тип билетов
+              ticket.activeByDefault = false;
+              // устанавливаем класс active на тот, по которому кликнули, за исключением ситуаций,
+              // когда Продано или Закрыто
+              if (ticket.refName === refName) {
+                if (!!ticket.count) {
+                  ticket.activeByDefault = true;
+                  activeTicket = ticket;
+                }
+              }
+            });
+          }
 				};
 		
 				if (activeTicket !== null) {
@@ -331,7 +272,16 @@
 
 			setLabelTextForWeekday () {
 				if (this.ticketTypeRef === 'ticketType03') this.validText = `<span>${this.labelWeekday}</span>`;
-			},		
+      },
+      
+      applyUserOptions () {
+        // Метод копирует значения, которые переданы прямо в html при рендеринге, если такие есть.
+        if(!!Object.keys(initialTicketsData).length) {
+          Object.keys(initialTicketsData).map(el => {
+            this[el] = initialTicketsData[el];
+          })
+        }
+      }
 		},
 
 		computed: {
@@ -406,7 +356,7 @@
 				if (this.deliveryOption) {
 					return `${this.deliveryOptionPrice} руб.`; 
 				} else {
-					return `не выбрана`;
+					return `без доставки`;
 				}
 				
 			},

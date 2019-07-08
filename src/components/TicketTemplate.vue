@@ -37,6 +37,15 @@
                     result = active? 'active' : '';     
                 }
                 return result;
+            },
+
+            addCloseClassToTicket(t) {
+                // Метод добавляет класс label-close для тикета с динамической ценой, если аквапарк закрыт
+                let res = '';
+                if (t.refName === 'ticketType01') {
+                    res = this.isWaterParkClosed? 'label-close': (t.count === 0 ? 'label-sold' : '');
+                }
+                return res;
             }
         },
     }
@@ -55,7 +64,7 @@
             'ticket-view', 
             ticket.classList, 
             this.addActiveClassToTicket(ticket.activeByDefault),
-            isWaterParkClosed? 'label-close': (ticket.count === 0 ? 'label-sold' : '')
+            this.addCloseClassToTicket(ticket)
         ]"
         @click="this.handleClickTicketType"
         v-if="this.needDisplayInSmartMode(ticket, isSmartMode, ticketTypeRef)"

@@ -56,9 +56,9 @@ export default {
   },
 
   methods: {
-    showChoiseTicket(isSmartMode, ticketTypeRef) {
-      if (isSmartMode) {
-        if (ticketTypeRef !== null) {
+    showChoiseTicket(x, y) {
+      if (x) {
+        if (y !== null) {
           return true;
         } else return false;
       } else return true;
