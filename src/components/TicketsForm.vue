@@ -103,17 +103,18 @@ export default {
 
     addClassDisabledForUsualDaySection() {
       // Вычисляемое свойство добавляет класс disabled для секции с выбором количества билетов "Любой день", если добавлен хотя бы один билет в секции "Будний день".
-      return this.countAdultWeekday > 0 || this.countChildWeekday > 0
-        ? "disabled"
-        : "";
-    },
+      return this.countAdultWeekday > 0 || this.countChildWeekday > 0;
+    }
   }
 };
 </script>
 
 <template>
   <div>
-    <fieldset class="choise-ticket-wrapper">
+    <fieldset 
+      class="choise-ticket-wrapper"
+      :class="ticketTypeRef"
+    >
       <h1>{{title}}</h1>
 
       <div class="choise-ticket-comment">
@@ -143,7 +144,7 @@ export default {
       <table
         v-if="this.showChoiseTicket(isSmartMode, ticketTypeRef)"
         class="choise-ticket"
-        :class="this.addClassDisabledForUsualDaySection"
+        :class="{disabled: this.addClassDisabledForUsualDaySection}"
       >
         <tr>
           <td class="td-number">

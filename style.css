@@ -448,7 +448,7 @@ body {
   font-size: 15px;
 }
 
-.booking-form-wrapper .submit .ticket-total-info .tickets-count+.tickets-price {
+.booking-form-wrapper .tickets-count+.tickets-price {
   margin-top: 28px;
 }
 
@@ -456,13 +456,20 @@ body {
   line-height: 35px;
 }
 
-.ticket-total-info .tickets-count,
+.tickets-count,
 .ticket-total-info .tickets-price {
   color: #1a1a1a;
 }
 
-.ticket-total-info .tickets-count {
+.tickets-count .title{
+  width: 140px;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 28px;
+}
+.tickets-count {
   font-size: 17px;
+  margin-top: 45px;
 }
 
 .ticket-total-info .tickets-price {
@@ -478,11 +485,11 @@ body {
 }
 
 .ticket-total-info .tickets-price .title,
-.ticket-total-info .tickets-count .title {
+.tickets-count .title {
   color: #808080;
 }
 
-.ticket-total-info .tickets-count .tickets-count__valid span {
+.tickets-count .tickets-count__valid span {
   color: #f21822;
   text-transform: uppercase;
 }
@@ -537,7 +544,7 @@ body {
   text-transform: uppercase;
 }
 
-.booking-form-wrapper .booking-form.success .submit-wrapper .submit .ticket-total-info .tickets-count+.tickets-price {
+.booking-form-wrapper .booking-form.success .submit-wrapper .tickets-count+.tickets-price {
   margin-top: 13px;
 }
 
@@ -626,6 +633,13 @@ body {
 .vdp-datepicker__calendar {
   border: none !important;
 }
+.vdp-datepicker__calendar .cell.day-header {
+  font-size: 10px;
+  font-weight: bold;
+}
+.vdp-datepicker__calendar header {
+  margin-bottom: 17px;
+}
 
 @media (max-width: 740px) {
   .booking-form-wrapper .booking-form div fieldset h1 {
@@ -688,6 +702,82 @@ body {
 
 /* submit block end */
 
+.smart .choise-ticket-wrapper.ticketType04 .choise-ticket {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.smart .b-choise-ticket {
+  margin-top: 20px;
+}
+.smart .choise-ticket .vdp-datepicker+.td-number-inner {
+  margin-top: 60px;
+  margin-left: 0;
+  text-align: center;
+}
+.smart .booking-form-wrapper .booking-form .choise-ticket td.td-number .vdp-datepicker+.td-number-inner .number-wrapper .price-descr{
+  text-align: center;
+  width: 100%;
+}
+.smart .booking-form-wrapper .booking-form .choise-ticket td.td-number .vdp-datepicker+.td-number-inner .number-wrapper .choise-number{
+  margin-bottom: 5px;
+  margin-right: 0;
+  width: 100%;
+}
+.smart .number-title.block-vip {
+  margin-bottom: 5px;
+}
+.smart .number-wrapper.block-vip {
+  font-size: 13px;
+  color: #808080;
+  display: inline-block;
+  margin-left: 40px;
+}
+.smart #goBackButton {
+  padding-left: 30px;
+  padding-right: 35px;
+}
+.smart .booking-form-wrapper .ticket-view .ticket-content{
+  padding-top: 30px;
+  padding-bottom: 12px;
+}
+.smart .booking-form-wrapper .ticket-view .ticket-content .ticket-title{
+  font-size: 31px;
+  padding-left: 15px;
+}
+.smart .booking-form-wrapper .ticket-view .ticket-content .ticket-price{
+  padding-left: 15px;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+.smart .booking-form-wrapper .ticket-view .ticket-content .ticket-icon{
+  margin-top: 30px;
+  height: 97px;
+}
+.smart .booking-form-wrapper .ticket-view .ticket-content .ticket-description{
+  font-size: 18px;
+  max-width: 385px;
+  width: auto;
+  margin-top: 16px;
+  margin-bottom: 90px;
+}
+.smart .booking-form-wrapper .ticket-view .ticket-content{
+  min-height: 350px;
+}
+.smart .booking-form-wrapper .ticket-view .left-decor:before{
+  height: 50px;
+  width: 50px;
+  left: -25px;
+  background-size: contain;
+  margin-top: -28px;
+}
+.smart .booking-form-wrapper .ticket-view .right-decor:before{
+  height: 50px;
+  width: 50px;
+  right: -25px;
+  background-size: contain;
+  margin-top: -28px;
+}
 
 @media (min-width: 658px) {
 
@@ -777,45 +867,44 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+/* SMART */
 
-  .b-choise-ticket {
-    flex-direction: column;
-  }
+.smart .b-choise-ticket {
+  flex-direction: column;
+}
 
-  .booking-form-wrapper .booking-form .choise-ticket-wrapper h1,
-  .choise-ticket-comment {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
+.smart .booking-form-wrapper .booking-form .choise-ticket-wrapper h1,
+.smart .choise-ticket-comment {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
-  .choise-ticket-comment {
-    height: 30px;
-  }
+.smart .choise-ticket-comment {
+  height: 30px;
+}
 
-  .go-back-button {
-    display: none;
-  }
+.smart .go-back-button {
+  display: none;
+}
 
-  .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-title {
-    padding-right: 5px;
-  }
+.smart .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-title {
+  padding-right: 5px;
+}
 
-  .goback .choise-ticket-comment {
-    text-align: right;
-  }
+.smart .goback .choise-ticket-comment {
+  text-align: right;
+}
 
-  .goback .choise-ticket-comment .ticket-comment__text {
-    display: none;
-  }
+.smart .goback .choise-ticket-comment .ticket-comment__text {
+  display: none;
+}
 
-  .goback .go-back-button {
-    display: inline-block;
-  }
+.smart .goback .go-back-button {
+  display: inline-block;
+}
 
-  .booking-form-wrapper .ticket-view {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 10px;
-  }
+.smart .booking-form-wrapper .ticket-view {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 10px;
 }

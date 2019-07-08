@@ -79,8 +79,8 @@
 		phone: '',																	// храним номер телефона покупателя билета в форме покупки
 		agree: '',																	// храним значение чекбокса "Согласен" в форме покупки
     isWaterParkClosed: false,										// признак того, что аквапарк закрыт сегодня
-    iconClear: './dist/assets/images/icon-clear.svg',
-		iconQuestion: './dist/assets/images/icon-question.svg',
+    iconClear: require("./assets/images/icon-clear.svg"),
+		iconQuestion: require("./assets/images/icon-question.svg"),
 		supportPhone: '+375 (29) 000-00-00',
 		ticketDateStart: new Date(),								// дата покупки билета,
 		labelAnyDay: 'Любой день',
@@ -101,10 +101,11 @@
     },
     
 		created: function() {
+			if (this.isSmartMode) {
+				document.body.classList.add('smart')
+			}
     	eventEmitter.$on('ticketTypeChanged', ticketRef => {
 				// прослушиваем событие, которое инициализирует клик по типу билета
-				console.log('перевыбран тип билета');
-				
 				this.getActiveTicketInformation(ticketRef);
 				this.clearAllPrices();
 			})
@@ -283,7 +284,7 @@
 					this.priceChildWeekday = ticket.priceChildWeekday;
 				}
 				if (ticket.refName === 'ticketType04') {
-					this.validText = `Весь день ${this.getRangeDate(ticket.ticketValidDuration)}`;
+					this.validText = this.getRangeDate(ticket.ticketValidDuration);
 				}
 			},
 
@@ -310,12 +311,13 @@
 			formatDate (date) {
 				const monthId = date.getMonth();
 				const monthStart = this.getMonthNameById(monthId);
-				return `${date.getDate()} ${monthStart}`;
+				const yearStart = date.getFullYear();
+				return `${date.getDate()} ${monthStart} ${yearStart}г.`;
 			},
 
 			changeTicketStartDate (date) {
 				this.ticketDateStart = date;
-				this.validText = `Весь день ${this.formatDate(this.ticketDateStart)}`;
+				this.validText = this.formatDate(this.ticketDateStart);
 			},
 
 			getMonthNameById (id) {
@@ -398,6 +400,15 @@
 			showVipBlock () {
 				// Вычисляемое свойство показывает, нужно ли показывать блок для типа билетов VIP
 				return this.ticketTypeRef === 'ticketType04';
+			},
+
+			deliveryPrice () {
+				if (this.deliveryOption) {
+					return `${this.deliveryOptionPrice} руб.`; 
+				} else {
+					return `не выбрана`;
+				}
+				
 			},
 		}
   }
@@ -525,44 +536,49 @@
           :disabled="totalCount === 0"
           class="remove-item button button--with-icon"
         >
-          <img src="iconClear" width="14" height="14" alt />Очистить форму
+          <img :src="iconClear" width="14" height="14" alt />Очистить форму
         </button>
 
         <p class="b-phone">
           <span>
-            <img src="iconQuestion" alt width="20" height="20" />
+            <img :src="iconQuestion" alt width="20" height="20" />
           </span>
           <a :href="supportPhoneLink">{{supportPhone}}</a>
         </p>
+				<div class="tickets-count">
+					<div class="row">
+						<span class="title">Тип билета</span>
+						<span class="tickets-count__type">
+							<strong>{{ticketType}}</strong>
+						</span>
+					</div>
+					<div class="row">
+						<span class="title">{{totalCount===1? 'Действителен' : 'Действительны'}}</span>
+						<span class="tickets-count__valid">
+							<strong v-html="validText"></strong>
+						</span>
+					</div>
+					<div class="row" v-if="!showVipBlock">
+						<span class="title">Детских</span>
+						<span class="tickets-count__child">
+							<strong>{{countChildTotal}}</strong>
+						</span>
+					</div>
+					<div class="row">
+						<span class="title">Взрослых</span>
+						<span class="tickets-count__adult">
+							<strong>{{countAdultTotal}}</strong>
+						</span>
+					</div>
+					<div class="row" v-if="showVipBlock">
+						<span class="title">Доставка</span>
+						<span class="tickets-count__valid">
+							<strong>{{deliveryPrice}}</strong>
+						</span>
+					</div>
+				</div>
         <div class="submit">
           <div class="ticket-total-info">
-            <div class="tickets-count">
-              <div class="row">
-                <span class="title">Тип билета</span>
-                <span class="tickets-count__type">
-                  <strong>{{ ticketType }}</strong>
-                </span>
-              </div>
-              <div class="row">
-                <span class="title">{{ totalCount===1? 'Действителен' : 'Действительны'}}</span>
-                <span class="tickets-count__valid">
-                  <strong v-html="validText"></strong>
-                </span>
-              </div>
-              <div class="row" v-if="!showVipBlock">
-                <span class="title">Детских</span>
-                <span class="tickets-count__child">
-                  <strong>{{ countChildTotal }}</strong>
-                </span>
-              </div>
-              <div class="row">
-                <span class="title">Взрослых</span>
-                <span class="tickets-count__adult">
-                  <strong>{{ countAdultTotal }}</strong>
-                </span>
-              </div>
-            </div>
-
             <div class="tickets-price">
               <div class="row">
                 <span class="title">Всего:</span>
