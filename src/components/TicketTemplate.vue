@@ -9,6 +9,7 @@
             'ticketTypeRef',
             'isSmartMode',
         ],
+
         methods: {
             handleClickTicketType: function (e) {
                 var newTicketTypeRef = e.target.closest('.ticket-view').dataset.ref;
@@ -21,8 +22,23 @@
                 if (ticket.refName === ticketTypeRef) {
                     return true;
                 } return false;
+            },
+
+            addActiveClassToTicket(active) {
+                // Вычисляемое свойство добавляет активный класс для блока билета
+                let result = '';
+                if (this.ticketTypeRef === null) {
+                    // Если это первая прогрузка шаблона, то нужно проверить, если мы в смарте, то никакой класс active устанавливать не нужно
+                    if (!this.isSmartMode) {
+                        result = active? 'active' : '';     
+                    }
+                } else {
+                    // Если это обычное переключение типов билетов, то всегда выставляем класс active для выбранного билета
+                    result = active? 'active' : '';     
+                }
+                return result;
             }
-        }
+        },
     }
 </script>
 
@@ -38,7 +54,7 @@
         :class="[
             'ticket-view', 
             ticket.classList, 
-            !isSmartMode? (ticket.activeByDefault? 'active' : '') : '',
+            this.addActiveClassToTicket(ticket.activeByDefault),
             isWaterParkClosed? 'label-close': (ticket.count === 0 ? 'label-sold' : '')
         ]"
         @click="this.handleClickTicketType"

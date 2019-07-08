@@ -103,12 +103,15 @@
 		created: function() {
     	eventEmitter.$on('ticketTypeChanged', ticketRef => {
 				// прослушиваем событие, которое инициализирует клик по типу билета
+				console.log('перевыбран тип билета');
+				
 				this.getActiveTicketInformation(ticketRef);
 				this.clearAllPrices();
 			})
       
       eventEmitter.$on('buttonClickedGoBack', () => {
 				// Слушатель события клика по кнопке "К выбору билета"
+				console.log('нажали кнопку К выбору билета');
 				this.clearAllPrices();
 				this.ticketTypeRef = null;
 				this.ticketType = null; 
@@ -157,7 +160,7 @@
 					this.ajustParentIframeHeight();
 				}
 				// smart mode определяется наличием класса smart в родительском элементе html (для случая, когда приложение запущено в iframe)
-				if (!this.isSmartMode) this.getActiveTicketInformation();
+				this.getActiveTicketInformation();
 			})
 		},
 
@@ -218,12 +221,16 @@
 
 			getActiveTicketInformation (refName) {
 				let activeTicket = null; 
+				const self = this;
 				// дальше получим параметры инициализации активного билета
 				// в зависимости от того, передан refName или нет, мы будем или брать активный по-умолчанию из настроек инициализации 
 				// или активный, по которому кликнули
 				
 				if (typeof refName === 'undefined') {
-					activeTicket = this.tickets.filter(function (ticket) {return ticket.activeByDefault})[0];
+					// Обработка ситуации выбора типа билета по-умолчанию, при заргузке. Для смарта ничего выделяться не должно
+					if (!this.isSmartMode) {
+						activeTicket = this.tickets.filter(function (ticket) {return ticket.activeByDefault})[0];
+					}
 				} else {
 					// если для выбранного типа билетов все билеты проданы или
 					// если аквапарт закрыт в этот день, то ничего не переключаем и оставляем выбранным предыдущий тип билетов
@@ -232,11 +239,11 @@
 							// удалим класс active с текущего активного типа билета (со всех)
 							// дополнительная проверка, если тип билета, на который кликнули в статусе Продано или Закрыто, 
 							// то оставляем активным предыдущий тип билетов
-							if (!!ticket.count && !this.isWaterParkClosed) {
+							if (!!ticket.count && !self.isWaterParkClosed) {
 								ticket.activeByDefault = false;
 							}
 							// устанавливаем класс active на тот, по которому кликнули, за исключением ситуаций,
-							// когда Продано или Закрыто или когда мы в версии для смарт
+							// когда Продано или Закрыто
 							if (ticket.refName === refName) {
 								if (!!ticket.count) {
 									ticket.activeByDefault = true;

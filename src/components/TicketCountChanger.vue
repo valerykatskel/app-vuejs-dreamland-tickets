@@ -145,6 +145,7 @@ export default {
         step="1"
         id="num1"
         required
+        readonly
         v-model.number="this.ticketCount"
         @input="console.log('enter new value')"
       />
