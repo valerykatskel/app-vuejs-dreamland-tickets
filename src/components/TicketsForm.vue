@@ -4,6 +4,7 @@ import TicketCountChanger from "./TicketCountChanger.vue";
 import TicketsList from "./TicketsList.vue";
 import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js";
 import { ru } from "vuejs-datepicker/src/locale";
+import FormCheckbox from './FormCheckbox.vue';
 import { eventEmitter } from "../main";
 
 export default {
@@ -27,6 +28,9 @@ export default {
     deliveryOption: {
       type: Boolean
     },
+    deliveryOptionText: {
+      type: String
+    },
     priceAdult: {
       type: Number
     },
@@ -45,7 +49,6 @@ export default {
       title: "Быстрая покупка билета в аквапарк «Дримлэнд»",
       formDescription: "Выберите тип билета",
       goBackTitle: "К выбору билета",
-      deliveryOptionText: "Доставка (10 руб.)",
       ru: ru,
       iconGoBack: require("../assets/images/icon-go-back.svg"),
       disabledDates: {
@@ -80,7 +83,8 @@ export default {
   components: {
     datepicker: Datepicker,
     ticketsList: TicketsList,
-    ticketCountChanger: TicketCountChanger
+    ticketCountChanger: TicketCountChanger,
+    formCheckbox: FormCheckbox,
   },
 
   computed: {
@@ -181,12 +185,15 @@ export default {
               ></ticket-count-changer>
 
               <div v-if="this.showVipBlock" class="number-title block-vip">
-                <input 
-                  :checked="this.deliveryOption" 
-                  type="checkbox"
-                  @click="handleDeliveryOptionChange" 
-                />
-                {{ deliveryOptionText }}
+                <form-checkbox
+                  model="deliveryOption"
+                  :value="this.deliveryOption"
+								  class="checkbox-agree"
+                  :required="true"
+                  id="deliveryOption"
+                  name="delivery-option"
+                  :label="this.deliveryOptionText"
+                ></form-checkbox>
               </div>
 
               <div v-if="this.showVipBlock" class="number-wrapper block-vip">

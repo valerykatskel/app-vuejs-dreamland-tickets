@@ -1,5 +1,6 @@
 <script>
 	import TicketsForm from './components/TicketsForm.vue';
+	import FormCheckbox from './components/FormCheckbox.vue';
 	import { eventEmitter } from './main';
   
   export default {
@@ -7,6 +8,7 @@
 		
     components: {
 			ticketsForm: TicketsForm,
+			formCheckbox: FormCheckbox,
     },
 
     data: function() {
@@ -26,7 +28,7 @@
         email: '',																	// храним адрес электронной почты покупателя билета в форме покупки
         userName: '',																// храним имя покупателя билета в форме покупки
         phone: '',																	// храним номер телефона покупателя билета в форме покупки
-        agree: '',																	// храним значение чекбокса "Согласен" в форме покупки
+        agree: false,																// храним значение чекбокса "Согласен" в форме покупки
         isWaterParkClosed: false,										// признак того, что аквапарк закрыт сегодня
         iconClear: require("./assets/images/icon-clear.svg"),
         iconQuestion: require("./assets/images/icon-question.svg"),
@@ -34,7 +36,8 @@
         ticketDateStart: new Date(),								// дата покупки билета,
         labelAnyDay: 'Любой день',
         labelWeekday: 'Будний день',			
-        deliveryOption: false,											// Возможна ли доставка выбранного типа билета? Доступно лишь для билетов типа VIP, для остальных этот параметр будет всегда false
+				deliveryOption: false,											// Возможна ли доставка выбранного типа билета? Доступно лишь для билетов типа VIP, для остальных этот параметр будет всегда false
+				deliveryOptionText: 'Доставка (10 руб.)',
         deliveryOptionPrice: 10, 										// Цена за доставку билетов
       };
     },
@@ -92,6 +95,12 @@
       eventEmitter.$on('checkboxDeliveryOptionChange', data => {
 				// Слушатель события клика по чекбоксу "Доставка (10 руб.)"
 				this.deliveryOption = data.target.checked;
+			})
+
+      eventEmitter.$on('updateCheckboxModel', model => {
+				// Слушатель события клика по чекбоксу, который переключает значение для модели чекбокса
+				console.log(`try to update model "${model}" from child`);
+				this.toggleCheckboxModel(model);
 			})
     },
     
@@ -208,6 +217,13 @@
 					this.ticketType = activeTicket.title;
 					this.ticketTypeRef = activeTicket.refName;
 				}
+			},
+
+			toggleCheckboxModel (model) {
+				// Метод переключает значение модели, которая используется в качестве данных для чекбокса
+				console.log(`>> old value of model "${model}"=${this[model]}`);
+				this[model] = !this[model];
+				console.log(`<< new value of model "${model}"=${this[model]}`);
 			},
 
 			updateTicketValidText (ticket) {
@@ -390,6 +406,7 @@
         :formatDate="formatDate"
 				:showVipBlock="showVipBlock"
 				:deliveryOption="deliveryOption"
+				:deliveryOptionText="deliveryOptionText"
 				:priceAdult="priceAdult"
 				:priceAdultWeekday="priceAdultWeekday"
 				:priceChild="priceChild"
@@ -463,18 +480,15 @@
           <tr>
             <th></th>
             <td>
-              <label class="checkbox-agree">
-                <input
-                  class="checkbox"
-                  type="checkbox"
-                  name="checkbox-agree"
-                  id="agree"
-                  required
-                  v-model="agree"
-                />
-                <span class="checkbox-custom"></span>
-                <span class="label">Согласен</span>
-              </label>
+							<form-checkbox
+								model="agree"
+								:value="agree"
+								:required="true"
+								id="agree"
+								name="agree"
+								label="Согласен"
+								class="checkbox-agree"
+							></form-checkbox>
             </td>
           </tr>
         </table>
