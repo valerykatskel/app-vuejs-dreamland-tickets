@@ -109,10 +109,6 @@ body {
   vertical-align: top;
 }
 
-
-
-
-
 .booking-form-wrapper .ticket-view .right-decor:before,
 .booking-form-wrapper .ticket-view .left-decor:before {
   background-color: #fff;
@@ -177,16 +173,6 @@ body {
   font-size: 30px;
   font-family: "Arial Black", Arial;
   font-weight: 900;
-}
-
-.booking-form-wrapper .choise-number button:hover {
-  background-color: #f9f9f9;
-}
-
-.booking-form-wrapper .choise-number button:focus,
-.booking-form-wrapper .choise-number button:active {
-  border: none;
-  background-color: #e6e6e6;
 }
 
 .booking-form-wrapper .ticket-view .ticket-content {
@@ -877,6 +863,12 @@ body {
     right: -25px;
     background-size: contain;
     margin-top: -28px;
+  }
+  .smart .booking-form-wrapper .booking-form fieldset.submit-wrapper {
+    padding-left: 15px;
+  }
+  .smart .booking-form-wrapper .submit{
+    padding-right: 15px;
   }
   .booking-form-wrapper .booking-form .td-number .number-wrapper .price-descr,
   .booking-form-wrapper .booking-form .td-number .number-wrapper .choise-number {

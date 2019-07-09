@@ -103,12 +103,12 @@ export default {
     },
 
     addClassDisabledForWeekdaySection() {
-      // Вычисляемое свойство добавляет класс disabled для секции с выбором количества билетов "Будний день", если добавлен хотя бы один билет в секции "Любой день".
-      return this.countAdult > 0 || this.countChild > 0 ? 'disabled' : '';
+      // Вычисляемое свойство возвращает true, если нужно добавить класс disabled для секции "Будний день".
+      return this.countAdult > 0 || this.countChild > 0;
     },
 
     addClassDisabledForUsualDaySection() {
-      // Вычисляемое свойство добавляет класс disabled для секции с выбором количества билетов "Любой день", если добавлен хотя бы один билет в секции "Будний день".
+      // Вычисляемое свойство возвращает true, если нужно добавить класс disabled для секции "Любой день".
       return this.countAdultWeekday > 0 || this.countChildWeekday > 0;
     }
   }
@@ -173,6 +173,7 @@ export default {
                 :ticketCount="countAdult"
                 :price="priceAdult"
                 kindOfTicket="adult"
+                :disabled="this.addClassDisabledForUsualDaySection"
               ></ticket-count-changer>
 
               <div v-if="!this.showVipBlock" class="number-title">
@@ -184,6 +185,7 @@ export default {
                 :ticketCount="countChild"
                 :price="priceChild"
                 kindOfTicket="child"
+                :disabled="this.addClassDisabledForUsualDaySection"
               ></ticket-count-changer>
 
               <div v-if="this.showVipBlock" class="number-title block-vip">
@@ -209,7 +211,7 @@ export default {
       <table
         v-if="!this.isWeekdayHidden"
         class="choise-ticket m-weekday"
-        :class="this.addClassDisabledForWeekdaySection"
+        :class="{disabled: this.addClassDisabledForWeekdaySection}"
       >
         <tr>
           <td class="td-number">
@@ -220,6 +222,7 @@ export default {
               :ticketCount="countAdultWeekday"
               :price="priceAdultWeekday"
               kindOfTicket="adultWeekday"
+              :disabled="this.addClassDisabledForWeekdaySection"
             ></ticket-count-changer>
 
             <div class="number-title">
@@ -230,6 +233,7 @@ export default {
               :ticketCount="countChildWeekday"
               :price="priceChildWeekday"
               kindOfTicket="childWeekday"
+              :disabled="this.addClassDisabledForWeekdaySection"
             ></ticket-count-changer>
           </td>
         </tr>

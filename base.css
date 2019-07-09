@@ -88,6 +88,7 @@ body *:after {
 
 .booking-form-wrapper .booking-form>fieldset.user-data-wrapper {
   padding-bottom: 5px;
+  padding-left: 15px;
 }
 
 .booking-form-wrapper .booking-form>fieldset h1 {
@@ -288,28 +289,6 @@ body *:after {
   box-shadow: none;
 }
 
-.booking-form-wrapper .choise-number button:focus {
-  border: 2px solid #b3b3b3;
-}
-
-.booking-form-wrapper .choise-number button:hover {
-  color: #fff;
-  background: #fdac2a;
-}
-
-.booking-form-wrapper .choise-number button[disabled],
-.booking-form-wrapper .choise-number button[disabled]:hover {
-  background: #b3b3b3;
-  cursor: default;
-}
-
-.booking-form-wrapper .choise-number input[type=number]::-webkit-inner-spin-button,
-.booking-form-wrapper .choise-number input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
-}
 
 .booking-form-wrapper .choise-number input[type=number] {
   -moz-appearance: textfield;
@@ -327,14 +306,6 @@ body *:after {
   text-align: center;
   outline: 0 none;
   box-shadow: none;
-}
-
-.booking-form-wrapper .choise-number input[type=number]:focus {
-  border: 2px solid #b3b3b3;
-}
-
-.booking-form-wrapper .choise-number input[type=number]:focus {
-  background: #b3b3b3;
 }
 
 .booking-form-wrapper .user-data {

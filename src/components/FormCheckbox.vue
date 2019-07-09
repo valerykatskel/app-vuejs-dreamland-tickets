@@ -22,10 +22,6 @@ export default {
     name: {
       type: String
     },
-
-    class: {
-      type: String
-    },
   },
 
   data: function() {
@@ -50,17 +46,13 @@ export default {
 </script>
 
 <template>
-  <label 
-    class="app-checkbox-custom"
-    :class="this.class"
-    >
+  <label class="app-checkbox-custom">
     <input
       class="checkbox"
       type="checkbox"
       :name="this.name"
       :id="this.id"
       :required="this.required"
-      :checkboxIconChecked="checkboxIconChecked"
       @change="handleCheckboxEvent(model)"
     />
     <span class="checkbox-custom"></span>

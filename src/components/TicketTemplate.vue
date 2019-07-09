@@ -71,14 +71,14 @@
     ]"
     @click="this.handleClickTicketType"
     v-if="this.needDisplayInSmartMode(ticket, isSmartMode, ticketTypeRef)"
->
+  >
     <div class="left-decor"></div>
     <slot name="ticketContent"></slot>
     <div class="right-decor"></div>
   </div>
 </template>
 
-<style>
+<style scoped>
   .ticket-icon-01 .ticket-icon .deg-value {
     font-size: 48px;
     padding-left: 40px;
@@ -88,4 +88,78 @@
     font-weight: 900;
     padding-top: 35px;
   }
+  .ticket-icon-01 .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-01.svg);
+    background-position: 50%;
+  }
+  .ticket-icon-02 .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-02.svg);
+    background-position: 50%;
+  }
+  .ticket-icon-03 .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-03.svg);
+    background-position: 50%;
+  }
+  .ticket-icon-04 .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-04.svg);
+    background-position: 50%;
+  }
+  .choise-ticket-wrapper .ticket-icon-01.active:not(.label-sold):not(.label-close) .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-01.active:not(.label-sold):not(.label-close):hover .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-01:not(.label-sold):not(.label-close):hover .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-01-active.svg);
+  }  
+  .choise-ticket-wrapper .ticket-icon-02.active:not(.label-sold):not(.label-close) .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-02.active:not(.label-sold):not(.label-close):hover .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-02:not(.label-sold):not(.label-close):hover .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-02-active.svg);
+  }
+  .choise-ticket-wrapper .ticket-icon-03.active:not(.label-sold):not(.label-close) .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-03.active:not(.label-sold):not(.label-close):hover .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-03:not(.label-sold):not(.label-close):hover .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-03-active.svg);
+  }
+  .choise-ticket-wrapper .ticket-icon-04.active:not(.label-sold):not(.label-close) .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-04.active:not(.label-sold):not(.label-close):hover .ticket-icon,
+  .choise-ticket-wrapper .ticket-icon-04:not(.label-sold):not(.label-close):hover .ticket-icon {
+    background-image: url(../assets/images/ticket-icon-04-active.svg);
+  }
+  .booking-form-wrapper .ticket-view.label-best {
+    background-position: right bottom;
+    background-size: 86px;
+    background-image: url(../assets/images/label-best.svg);
+    background-repeat: no-repeat;
+  }
+
+  .booking-form-wrapper .ticket-view.label-sold {
+    background-position: right bottom;
+    background-size: 90px;
+    background-image: url(../assets/images/label-sold.svg);
+    background-repeat: no-repeat;
+  }
+  
+  .booking-form-wrapper .ticket-view.label-close {
+    background-position: right bottom;
+    background-size: 90px;
+    background-image: url(../assets/images/label-close.svg);
+    background-repeat: no-repeat;
+  }
+
+  .booking-form-wrapper .ticket-view .left-decor:before {
+    background-image: url(../assets/images/left-corner-bg.png);
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    height: 30px;
+    width: 30px;
+    left: -15px;
+  }
+
+  .booking-form-wrapper .ticket-view .right-decor:before {
+    background-image: url(../assets/images/right-corner-bg.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    height: 30px;
+    width: 30px;
+    right: -17px;
+  }  
 </style>

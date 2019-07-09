@@ -15,6 +15,10 @@ export default {
     price: {
       type: Number
     },
+
+    disabled: {
+      type: Boolean
+    }
   },
 
   data: function() {
@@ -80,6 +84,7 @@ export default {
         class="reduce" 
         @click="reduceCount(1)" 
         type="button"
+        :disabled="this.disabled"
       >
         <img :src="iconMinus" alt="-" />
       </button>
@@ -101,6 +106,7 @@ export default {
         class="enhance" 
         @click="increaseCount(1)" 
         type="button"
+        :disabled="this.disabled"
       >
         <img :src="iconPlus" alt="+" />
       </button>
@@ -112,3 +118,27 @@ export default {
     </p>
   </div>
 </template>
+
+<style scoped>
+  .choise-number input[type=number]::-webkit-inner-spin-button,
+  .choise-number input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+  .choise-number button[disabled] {
+    cursor: default;
+  }
+  .choise-number button[disabled]:hover {
+    cursor: default;
+  }
+  .choise-number button:hover:not(:disabled) {
+    color: #fff;
+    background-color: #f9f9f9;
+  }
+  .choise-number button:focus:not(:disabled),
+  .choise-number button:active:not(:disabled) {
+    background-color: #e6e6e6;
+  }
+</style>
