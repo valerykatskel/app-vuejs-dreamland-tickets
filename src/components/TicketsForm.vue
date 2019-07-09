@@ -80,29 +80,31 @@ export default {
       eventEmitter.$emit('checkboxDeliveryOptionChange', data);
     },
   },
+
   components: {
-    datepicker: Datepicker,
-    ticketsList: TicketsList,
-    ticketCountChanger: TicketCountChanger,
-    formCheckbox: FormCheckbox,
+    Datepicker,
+    TicketsList,
+    TicketCountChanger,
+    FormCheckbox,
   },
 
   computed: {
     isWeekdayHidden() {
       return (
         this.tickets.filter(function(el) {
-          return el.refName === "ticketType03" && el.activeByDefault === true;
+          return el.refName === 'ticketType03' && el.activeByDefault;
         }).length === 0
       );
     },
 
     showKindOfDay() {
-      return this.ticketTypeRef === "ticketType03";
+      // Вычисляемое свойство возвращает true, если выбран тип билета "Весь день"
+      return this.ticketTypeRef === 'ticketType03';
     },
 
     addClassDisabledForWeekdaySection() {
       // Вычисляемое свойство добавляет класс disabled для секции с выбором количества билетов "Будний день", если добавлен хотя бы один билет в секции "Любой день".
-      return this.countAdult > 0 || this.countChild > 0 ? "disabled" : "";
+      return this.countAdult > 0 || this.countChild > 0 ? 'disabled' : '';
     },
 
     addClassDisabledForUsualDaySection() {
