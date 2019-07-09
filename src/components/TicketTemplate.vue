@@ -11,10 +11,9 @@
     },
 
     methods: {
-      handleClickTicketType: function (e) {
-        var newTicketTypeRef = e.target.closest('.ticket-view').dataset.ref;
+      handleClickTicketType: function (ref) {
         // известим родительский компонент о том, что тип билета перевыбран
-        eventEmitter.$emit('ticketTypeChanged', newTicketTypeRef);
+        eventEmitter.$emit('ticketTypeChanged', ref);
       },
 
       needDisplayInSmartMode: function (ticket, isSmartMode, ticketTypeRef) {
@@ -69,7 +68,7 @@
       this.addActiveClassToTicket(ticket.activeByDefault),
       this.addCloseClassToTicket(ticket)
     ]"
-    @click="this.handleClickTicketType"
+    @click="handleClickTicketType(ticket.refName)"
     v-if="this.needDisplayInSmartMode(ticket, isSmartMode, ticketTypeRef)"
   >
     <div class="left-decor"></div>
@@ -104,6 +103,10 @@
     background-image: url(../assets/images/ticket-icon-04.svg);
     background-position: 50%;
   }
+  .ticket-view.label-sold .ticket-content,
+  .ticket-view.label-close .ticket-content {
+    cursor: default;
+  }
   .choise-ticket-wrapper .ticket-icon-01.active:not(.label-sold):not(.label-close) .ticket-icon,
   .choise-ticket-wrapper .ticket-icon-01.active:not(.label-sold):not(.label-close):hover .ticket-icon,
   .choise-ticket-wrapper .ticket-icon-01:not(.label-sold):not(.label-close):hover .ticket-icon {
@@ -137,7 +140,7 @@
     background-image: url(../assets/images/label-sold.svg);
     background-repeat: no-repeat;
   }
-  
+
   .booking-form-wrapper .ticket-view.label-close {
     background-position: right bottom;
     background-size: 90px;

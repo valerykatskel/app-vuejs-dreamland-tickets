@@ -164,6 +164,13 @@
 				this.clearAllPrices();
 			},
 
+			isTicketsSold (ref) {
+				let res = this.tickets.filter(ticket => {
+					return ticket.refName === ref && ticket.count === 0
+				}).length > 0;
+				return res;
+			},
+
 			clearAllPrices () {
 				this.countAdult = 0;
 				this.countAdultWeekday = 0;
@@ -190,8 +197,9 @@
 						activeTicket = this.tickets.filter(function (ticket) {return ticket.activeByDefault})[0];
 					}
 				} else {
-          // Если аквапарк закрыт и мы кликаем по билету Динамическая цена, то ничего не делаем.
-          if (this.isWaterParkClosed && refName === 'ticketType01') {
+					// Если аквапарк закрыт и мы кликаем по билету Динамическая цена
+					// или если мы кликаем по типу распроданых билетов, то ничего не делаем.
+					if ((this.isWaterParkClosed && refName === 'ticketType01') || this.isTicketsSold(refName)) {
             return
           } else {
             this.tickets.map(ticket => {

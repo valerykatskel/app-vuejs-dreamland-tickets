@@ -231,11 +231,6 @@ body {
 
 .booking-form-wrapper .ticket-view.label-sold .ticket-content,
 .booking-form-wrapper .ticket-view.label-close .ticket-content {
-  cursor: default;
-}
-
-.booking-form-wrapper .ticket-view.label-sold .ticket-content,
-.booking-form-wrapper .ticket-view.label-close .ticket-content {
   opacity: .2;
 }
 
