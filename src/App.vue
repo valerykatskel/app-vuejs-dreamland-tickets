@@ -165,10 +165,9 @@
 			},
 
 			isTicketsSold (ref) {
-				let res = this.tickets.filter(ticket => {
+				return this.tickets.filter(ticket => {
 					return ticket.refName === ref && ticket.count === 0
 				}).length > 0;
-				return res;
 			},
 
 			clearAllPrices () {
