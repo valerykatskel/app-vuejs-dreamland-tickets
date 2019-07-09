@@ -391,35 +391,6 @@ body *:after {
   display: none;
 }
 
-.booking-form-wrapper .user-data th .checkbox-agree,
-.booking-form-wrapper .user-data td .checkbox-agree {
-  display: inline-block;
-  cursor: pointer;
-  outline: 0 none;
-  box-shadow: none;
-}
-
-.booking-form-wrapper .user-data th .checkbox-agree .checkbox,
-.booking-form-wrapper .user-data td .checkbox-agree .checkbox {
-  display: none;
-}
-
-.booking-form-wrapper .user-data th .checkbox-agree .checkbox-custom,
-.booking-form-wrapper .user-data td .checkbox-agree .checkbox-custom {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  background: #fff;
-}
-
-.booking-form-wrapper .user-data th .checkbox-agree .checkbox-custom,
-.booking-form-wrapper .user-data td .checkbox-agree .checkbox-custom,
-.booking-form-wrapper .user-data th .checkbox-agree .label,
-.booking-form-wrapper .user-data td .checkbox-agree .label {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-}
 
 .booking-form-wrapper .user-data th {
   min-width: 140px;
