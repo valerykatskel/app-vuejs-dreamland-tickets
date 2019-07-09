@@ -188,7 +188,6 @@ export default {
                 <form-checkbox
                   model="deliveryOption"
                   :value="this.deliveryOption"
-								  class="checkbox-agree"
                   :required="true"
                   id="deliveryOption"
                   name="delivery-option"

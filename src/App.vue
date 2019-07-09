@@ -487,7 +487,6 @@
 								id="agree"
 								name="agree"
 								label="Согласен"
-								class="checkbox-agree"
 							></form-checkbox>
             </td>
           </tr>
