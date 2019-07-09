@@ -44,6 +44,8 @@
                 let res = '';
                 if (t.refName === 'ticketType01') {
                     res = this.isWaterParkClosed? 'label-close': (t.count === 0 ? 'label-sold' : '');
+                } else {
+                    res = t.count === 0 ? 'label-sold' : '';
                 }
                 return res;
             }
