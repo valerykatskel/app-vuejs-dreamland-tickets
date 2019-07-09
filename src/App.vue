@@ -97,6 +97,12 @@
 				this.deliveryOption = data.target.checked;
 			})
 
+      eventEmitter.$on('changeTicketStartDate', date => {
+				// Слушатель события выбора новой даты в datepicker
+				this.ticketDateStart = date;
+				this.validText = this.formatDate(this.ticketDateStart);
+			}),
+
       eventEmitter.$on('updateCheckboxModel', model => {
 				// Слушатель события клика по чекбоксу, который переключает значение для модели чекбокса
 				console.log(`try to update model "${model}" from child`);
@@ -272,11 +278,6 @@
 				return `${date.getDate()} ${monthStart} ${yearStart}г.`;
 			},
 
-			changeTicketStartDate (date) {
-				this.ticketDateStart = date;
-				this.validText = this.formatDate(this.ticketDateStart);
-			},
-
 			getMonthNameById (id) {
 				const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 				return monthNames[id];
@@ -401,7 +402,6 @@
         :countAdultWeekday="countAdultWeekday"
         :countChild="countChild"
         :countChildWeekday="countChildWeekday"
-        :changeTicketStartDate="changeTicketStartDate"
         :ticketDateStart="ticketDateStart"
         :formatDate="formatDate"
 				:showVipBlock="showVipBlock"

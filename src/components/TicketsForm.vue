@@ -1,11 +1,11 @@
 <script>
-import TicketTemplate from "./TicketTemplate.vue";
-import TicketCountChanger from "./TicketCountChanger.vue";
-import TicketsList from "./TicketsList.vue";
-import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js";
-import { ru } from "vuejs-datepicker/src/locale";
+import TicketTemplate from './TicketTemplate.vue';
+import TicketCountChanger from './TicketCountChanger.vue';
+import TicketsList from './TicketsList.vue';
+import Datepicker from 'vuejs-datepicker/dist/vuejs-datepicker.esm.js';
+import { ru } from 'vuejs-datepicker/src/locale';
 import FormCheckbox from './FormCheckbox.vue';
-import { eventEmitter } from "../main";
+import { eventEmitter } from '../main';
 
 export default {
   props: {
@@ -19,7 +19,6 @@ export default {
     ticketTypeRef: {},
     isSmartMode: {},
     getRangeDate: {},
-    changeTicketStartDate: {},
     ticketDateStart: {},
     formatDate: {},
     showVipBlock: {
@@ -46,11 +45,11 @@ export default {
   },
   data: function() {
     return {
-      title: "Быстрая покупка билета в аквапарк «Дримлэнд»",
-      formDescription: "Выберите тип билета",
-      goBackTitle: "К выбору билета",
+      title: 'Быстрая покупка билета в аквапарк «Дримлэнд»',
+      formDescription: 'Выберите тип билета',
+      goBackTitle: 'К выбору билета',
       ru: ru,
-      iconGoBack: require("../assets/images/icon-go-back.svg"),
+      iconGoBack: require('../assets/images/icon-go-back.svg'),
       disabledDates: {
         from: new Date(2019, 7, 20), // номера месяцев начинаются с нуля, поэтому 20 августа будет так описано, день когда аквапарк закрывается
         to: new Date(new Date().setDate(new Date().getDate() - 1)) // вчерашний день уже незачем выбирать
@@ -59,21 +58,22 @@ export default {
   },
 
   methods: {
-    showChoiseTicket(x, y) {
-      if (x) {
-        if (y !== null) {
+    showChoiseTicket(isSmartMode, ticketTypeRef) {
+      if (isSmartMode) {
+        if (ticketTypeRef !== null) {
           return true;
         } else return false;
       } else return true;
     },
 
     handleClickGoBack() {
-      // известим родительский компонент о том, что мы вернулись на исходное положение в выборе билетов в смарт версии
-      eventEmitter.$emit("buttonClickedGoBack");
+      // Метод обработчик клика по кнопке возврата назад к выбору билетов
+      eventEmitter.$emit('buttonClickedGoBack');
     },
 
-    handleSelectVIPDate(date) {
-      this.changeTicketStartDate(date);
+    handleSelectDate(date) {
+      // Метод обработчик выбора даты в календаре
+      eventEmitter.$emit('changeTicketStartDate', date);
     },
 
     handleDeliveryOptionChange(data) {
@@ -160,7 +160,7 @@ export default {
               :language="ru"
               :monday-first="true"
               v-if="this.showVipBlock"
-              @selected="handleSelectVIPDate"
+              @selected="handleSelectDate"
             ></datepicker>
 
             <div class="td-number-inner">
