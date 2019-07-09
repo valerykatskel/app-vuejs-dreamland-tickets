@@ -213,19 +213,19 @@
 			updateTicketValidText (ticket) {
 				// Метод обновляет значение для переменной, в которой хранится текст о сроке действия билета выбранного типа
 				if (ticket.refName === 'ticketType01') {
-					this.validText = `Весь день ${this.getRangeDate(ticket.ticketValidDuration)}`;
+					this.validText = `${this.getRangeDate(ticket.ticketValidDuration)}`;
 				}
 				if (ticket.refName === 'ticketType02') {
 					this.validText = `После 16:00  ${this.getRangeDate(ticket.ticketValidDuration)}`;
 				}
 				if (ticket.refName === 'ticketType03') {
-					this.validText = this.getRangeDate(ticket.ticketValidDuration);
+					this.validText = `${this.getRangeDate(ticket.ticketValidDuration)}`;
 					// для типа билетов "Весь день" обновим цены билетов для варианта "Будний день"
 					this.priceAdultWeekday = ticket.priceAdultWeekday;
 					this.priceChildWeekday = ticket.priceChildWeekday;
 				}
 				if (ticket.refName === 'ticketType04') {
-					this.validText = this.getRangeDate(ticket.ticketValidDuration);
+					this.validText = `${this.getRangeDate(ticket.ticketValidDuration)}`;
 				}
 			},
 
@@ -484,16 +484,6 @@
       </fieldset>
 
       <fieldset class="submit-wrapper" :class="totalCount === 0 ? 'hidden' : ''">
-        <button
-          type="reset"
-          id="close-form"
-          @click="clearAllPrices"
-          :disabled="totalCount === 0"
-          class="remove-item button button--with-icon"
-        >
-          <img :src="iconClear" width="14" height="14" alt />Очистить форму
-        </button>
-
         <p class="b-phone">
           <span>
             <img :src="iconQuestion" alt width="20" height="20" />
@@ -537,16 +527,26 @@
             <div class="tickets-price">
               <div class="row">
                 <span class="title">Всего:</span>
-                <span id="tickets-count">{{ totalCount }}</span>
-                {{ getCorrectTicketString }}
+                <span id="tickets-count">{{totalCount}}</span>
+                {{getCorrectTicketString}}
               </div>
               <div class="row">
                 <span class="title">Итого:</span>
-                <span id="tickets-price">{{ showTicketTotalPrice }}</span> руб.
+                <span id="tickets-price">{{showTicketTotalPrice}}</span> руб.
               </div>
             </div>
           </div>
-          <input type="submit" value="Оплатить" class="button" :disabled="isUserDataValid" />
+          <input type="submit" value="Купить" class="button" :disabled="isUserDataValid" />
+					<span class="span-divider">Или</span>
+					<button
+						type="reset"
+						id="close-form"
+						@click="clearAllPrices"
+						:disabled="totalCount === 0"
+						class="remove-item button button--with-icon"
+					>
+						<img :src="iconClear" width="14" height="14" alt />Очистить форму
+					</button>
         </div>
       </fieldset>
     </form>

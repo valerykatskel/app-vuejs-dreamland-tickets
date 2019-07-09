@@ -126,7 +126,7 @@ export default {
           id="goBackButton"
           type="button"
         >
-          <img src="iconGoBack" alt width="14" height="14" />
+          <img :src="iconGoBack" alt width="14" height="14" />
           {{goBackTitle}}
         </button>
       </div>

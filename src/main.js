@@ -12,8 +12,8 @@ import App from './App.vue'
   };
 }(Element.prototype));
 
-export const eventEmitter = new Vue()
-
+Vue.config.devtools = true;
+export const eventEmitter = new Vue();
 new Vue({
   el: '#app',
   render: h => h(App)
