@@ -713,10 +713,12 @@ body {
 .smart .number-title.block-vip {
   margin-bottom: 5px;
 }
-.smart .number-wrapper.block-vip {
+.number-wrapper.block-vip {
   font-size: 13px;
   color: #808080;
   display: inline-block;
+}
+.smart .number-wrapper.block-vip {
   margin-left: 40px;
 }
 .smart #goBackButton {
@@ -944,7 +946,10 @@ body {
     padding-left: 40px;
   }
 
-  .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-title {
+  .number-title .app-checkbox-custom .checkbox-custom{
+    margin-top: 0;
+  }
+  .number-title .app-checkbox-custom .label{
     color: #000;
     font-size: 21px;
     font-weight: bold;

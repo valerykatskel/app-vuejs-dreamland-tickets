@@ -73,7 +73,7 @@ export default {
   }
   .app-checkbox-custom .checkbox-custom, 
   .app-checkbox-custom .label {
-    display: inline-block;
+    display: initial;
     vertical-align: middle;
     margin-right: 10px;
   }
