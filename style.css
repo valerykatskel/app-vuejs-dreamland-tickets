@@ -667,6 +667,10 @@ body {
 .booking-form-wrapper .submit .ticket-total-info {
   text-align: left;
 }
+.booking-form-wrapper .booking-form>fieldset.user-data-wrapper,
+.booking-form-wrapper .booking-form>fieldset.submit-wrapper{
+  padding-left: 15px;
+}
 
 .booking-form-wrapper .submit .ticket-total-info+.button {
   margin-top: 20px;
@@ -719,7 +723,8 @@ body {
   display: inline-block;
 }
 .smart .number-wrapper.block-vip {
-  margin-left: 40px;
+  margin-left: 30px;
+  text-align: left;
 }
 .smart #goBackButton {
   padding-left: 30px;
@@ -754,6 +759,10 @@ body {
 @media (max-width: 658px) {
   .smart .booking-form-wrapper .ticket-view .ticket-content .ticket-description{
     line-height: 22px;
+  }
+  .smart .booking-form-wrapper .booking-form>fieldset.user-data-wrapper,
+  .smart .booking-form-wrapper .booking-form>fieldset.submit-wrapper{
+    padding-left: 10px;
   }
   .smart .booking-form-wrapper .ticket-view .ticket-content .ticket-icon{
     margin-top: 0;
@@ -861,11 +870,11 @@ body {
     background-size: contain;
     margin-top: -28px;
   }
-  .smart .booking-form-wrapper .booking-form fieldset.submit-wrapper {
-    padding-left: 15px;
+  .smart .booking-form-wrapper .submit {
+    padding-right: 40px;
   }
-  .smart .booking-form-wrapper .submit{
-    padding-right: 15px;
+  .smart .booking-form-wrapper .remove-item{
+    right: 40px;
   }
   .booking-form-wrapper .booking-form .td-number .number-wrapper .price-descr,
   .booking-form-wrapper .booking-form .td-number .number-wrapper .choise-number {
@@ -878,8 +887,11 @@ body {
   }
 
   .user-data td,
-  .booking-form-wrapper .booking-form>.user-data-wrapper,
-  .booking-form-wrapper .booking-form fieldset.submit-wrapper {
+  .booking-form-wrapper .booking-form>.user-data-wrapper {
+    padding-left: 45px;
+  }
+  .smart .booking-form-wrapper .booking-form fieldset.submit-wrapper,
+  .smart .booking-form-wrapper .booking-form fieldset.user-data-wrapper {
     padding-left: 45px;
   }
 
