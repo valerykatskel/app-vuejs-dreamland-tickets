@@ -110,7 +110,12 @@ export default {
     addClassDisabledForUsualDaySection() {
       // Вычисляемое свойство возвращает true, если нужно добавить класс disabled для секции "Любой день".
       return this.countAdultWeekday > 0 || this.countChildWeekday > 0;
-    }
+    },
+
+    isDeliveryCheckboxDisable() {
+      // Вычисляемое свойство возвращает true, если не выбрано ни одного билета, тем самым дизейблится чекбокс "Доставка"
+      return this.countAdult === 0;
+    },
   }
 };
 </script>
@@ -196,6 +201,7 @@ export default {
                   id="deliveryOption"
                   name="delivery-option"
                   :label="this.deliveryOptionText"
+                  :disabled="this.isDeliveryCheckboxDisable"
                 ></form-checkbox>
               </div>
 
