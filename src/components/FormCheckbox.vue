@@ -22,6 +22,10 @@ export default {
     name: {
       type: String
     },
+
+    disabled: {
+      type: Boolean
+    },
   },
 
   data: function() {
@@ -46,13 +50,17 @@ export default {
 </script>
 
 <template>
-  <label class="app-checkbox-custom">
+  <label 
+    class="app-checkbox-custom"
+    :class="{'disabled': this.disabled}"
+  >
     <input
       class="checkbox"
       type="checkbox"
       :name="this.name"
       :id="this.id"
       :required="this.required"
+      :disabled="this.disabled"
       @change="handleCheckboxEvent(model)"
     />
     <span class="checkbox-custom"></span>
@@ -70,6 +78,9 @@ export default {
     outline: 0 none;
     box-shadow: none;
     height: 50px;
+  }
+  .app-checkbox-custom.disabled {
+    opacity: 0.5;
   }
   .app-checkbox-custom .checkbox-custom, 
   .app-checkbox-custom .label {
@@ -89,7 +100,7 @@ export default {
     height: 20px;
     background: #fff;
   }
-  .app-checkbox-custom:hover .checkbox-custom::before,
+  .app-checkbox-custom:hover:not(.disabled) .checkbox-custom::before,
   .app-checkbox-custom .checkbox:checked+.checkbox-custom:before {
     content: "";
     display: block;
