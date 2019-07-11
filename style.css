@@ -96,13 +96,13 @@ body {
 }
 
 .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .price-descr .price {
-  font-size: 32px;
+  font-size: 25px;
   font-family: "Arial Black", Arial;
   font-weight: 900;
 }
 
 .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper .price-descr .price strong {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .booking-form-wrapper .booking-form .choise-ticket td {
@@ -166,13 +166,6 @@ body {
 .booking-form-wrapper .submit .button[disabled],
 .booking-form-wrapper .submit .button[disabled]:hover {
   background-color: #00c1ff;
-}
-
-.booking-form-wrapper .choise-number input[type=number] {
-  color: #000;
-  font-size: 30px;
-  font-family: "Arial Black", Arial;
-  font-weight: 900;
 }
 
 .booking-form-wrapper .ticket-view .ticket-content {
@@ -300,20 +293,7 @@ body {
   color: #fff;
 }
 
-.booking-form-wrapper .choise-number button:disabled {
-  background-color: #F0F2F3;
-}
 
-.booking-form-wrapper .choise-number button {
-  background-color: #F0F2F3;
-  padding: 0 10px;
-  border-radius: 3px;
-}
-
-.booking-form-wrapper .choise-number button img {
-  vertical-align: middle;
-  display: block;
-}
 
 
 .booking-form-wrapper .booking-form>div~fieldset {

@@ -129,9 +129,26 @@ export default {
   }
   .choise-number button[disabled] {
     cursor: default;
+    background-color: #F0F2F3;
   }
   .choise-number button[disabled]:hover {
     cursor: default;
+  }
+
+  .choise-number button {
+    background-color: #F0F2F3;
+    padding: 0 10px;
+    border-radius: 3px;
+  }
+
+  .choise-number button img {
+    display: block;
+  }  
+  .choise-number input[type=number] {
+    color: #000;
+    font-size: 25px;
+    font-family: "Arial Black", Arial;
+    font-weight: 900;
   }
   .choise-number button:hover:not(:disabled) {
     color: #fff;
