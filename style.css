@@ -672,6 +672,9 @@ body {
 }
 /* submit block end */
 
+.smart .booking-form-wrapper .ticket-icon-01 .ticket-icon .deg-value{
+  line-height: 83px;
+}
 .smart .choise-ticket-wrapper.ticketType04 .choise-ticket {
   width: 300px;
   margin-left: auto;
