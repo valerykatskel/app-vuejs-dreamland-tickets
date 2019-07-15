@@ -193,7 +193,7 @@ body {
   color: #808080;
   font-size: 15px;
   line-height: 25px;
-  width: 180px;
+  width: 190px;
   margin: 0 auto 0 auto;
 }
 
@@ -672,9 +672,6 @@ body {
 }
 /* submit block end */
 
-.smart .booking-form-wrapper .ticket-icon-01 .ticket-icon .deg-value{
-  line-height: 83px;
-}
 .smart .choise-ticket-wrapper.ticketType04 .choise-ticket {
   width: 300px;
   margin-left: auto;
@@ -859,6 +856,10 @@ body {
   .smart .booking-form-wrapper .remove-item{
     right: 40px;
   }
+  .number-title.block-vip {
+    margin-bottom: 14px;
+    margin-top: 110px;
+  }
   .booking-form-wrapper .booking-form .td-number .number-wrapper .price-descr,
   .booking-form-wrapper .booking-form .td-number .number-wrapper .choise-number {
     float: left;
@@ -946,8 +947,16 @@ body {
   }
   .number-title .app-checkbox-custom .label{
     color: #000;
-    font-size: 21px;
+    font-size: 16px;
     font-weight: bold;
+  }
+  
+  .smart .number-title .app-checkbox-custom .label{
+    font-size: 21px;
+  }
+  .booking-form-wrapper .booking-form .choise-ticket td.td-number .number-wrapper p {
+    margin: 6px 0;
+    font-size: 13px;
   }
 }
 

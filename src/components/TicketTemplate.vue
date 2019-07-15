@@ -81,7 +81,7 @@
   .ticket-icon-01 .ticket-icon .deg-value {
     font-size: 48px;
     padding-left: 40px;
-    line-height: 93px;
+    line-height: 83px;
     color: #808080;
     font-family: "Arial Black", Arial;
     font-weight: 900;
@@ -165,4 +165,8 @@
     width: 30px;
     right: -17px;
   }  
+  .smart .booking-form-wrapper .ticket-view.label-sold,
+  .smart .booking-form-wrapper .ticket-view.label-close {
+    background-size: 150px;
+  }
 </style>
