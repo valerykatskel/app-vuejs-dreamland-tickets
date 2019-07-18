@@ -26,6 +26,10 @@ export default {
     disabled: {
       type: Boolean
     },
+
+    deliveryOption: {
+      type: Boolean
+    }
   },
 
   data: function() {
@@ -57,6 +61,7 @@ export default {
     <input
       class="checkbox"
       type="checkbox"
+      :checked="this.deliveryOption"
       :name="this.name"
       :id="this.id"
       :required="this.required"
@@ -80,6 +85,7 @@ export default {
   }
   .app-checkbox-custom.disabled {
     opacity: 0.5;
+    cursor: default;
   }
   .app-checkbox-custom .checkbox-custom, 
   .app-checkbox-custom .label {

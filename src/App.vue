@@ -45,7 +45,6 @@
 		created: function() {
       this.applyUserOptions();
 
-
 			if (this.isSmartMode) {
 				document.body.classList.add('smart')
 			}
@@ -57,7 +56,6 @@
       
       eventEmitter.$on('buttonClickedGoBack', () => {
 				// Слушатель события клика по кнопке "К выбору билета"
-				console.log('нажали кнопку К выбору билета');
 				this.clearAllPrices();
 				this.ticketTypeRef = null;
 				this.ticketType = null; 
@@ -66,35 +64,29 @@
 
     	eventEmitter.$on('changeAdult', count => {
 				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества взрослых билетов
-				console.log(`change countAdult from child`);
 				this.countAdult = count;
+				if (count === 0) {
+					this.deliveryOption = false;
+				}
 				this.setLabelTextForAnyDay();
 			})
 
     	eventEmitter.$on('changeAdultWeekday', count => {
 				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества взрослых билетов в будний день
-				console.log(`change countAdultWeekday from child`);
 				this.countAdultWeekday = count;
 				this.setLabelTextForWeekday();
 			})
 
       eventEmitter.$on('changeChild', count => {
 				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества детских билетов
-				console.log(`change countChild from child`);
 				this.countChild = count;
 				this.setLabelTextForAnyDay();
 			})
 
       eventEmitter.$on('changeChildWeekday', count => {
 				// Слушатель события, которое поднимается от потомка и после наступления которого нужно изменить значение количества детских билетов в будний день
-				console.log(`change countChildWeekday from child`);
 				this.countChildWeekday = count;
 				this.setLabelTextForWeekday();
-			})
-
-      eventEmitter.$on('checkboxDeliveryOptionChange', data => {
-				// Слушатель события клика по чекбоксу "Доставка (10 руб.)"
-				this.deliveryOption = data.target.checked;
 			})
 
       eventEmitter.$on('changeTicketStartDate', date => {
@@ -105,7 +97,6 @@
 
       eventEmitter.$on('updateCheckboxModel', model => {
 				// Слушатель события клика по чекбоксу, который переключает значение для модели чекбокса
-				console.log(`try to update model "${model}" from child`);
 				this.toggleCheckboxModel(model);
 			})
     },
@@ -234,9 +225,7 @@
 
 			toggleCheckboxModel (model) {
 				// Метод переключает значение модели, которая используется в качестве данных для чекбокса
-				console.log(`>> old value of model "${model}"=${this[model]}`);
 				this[model] = !this[model];
-				console.log(`<< new value of model "${model}"=${this[model]}`);
 			},
 
 			updateTicketValidText (ticket) {

@@ -75,10 +75,6 @@ export default {
       // Метод обработчик выбора даты в календаре
       eventEmitter.$emit('changeTicketStartDate', date);
     },
-
-    handleDeliveryOptionChange(data) {
-      eventEmitter.$emit('checkboxDeliveryOptionChange', data);
-    },
   },
 
   components: {
@@ -196,7 +192,7 @@ export default {
               <div v-if="this.showVipBlock" class="number-title block-vip">
                 <form-checkbox
                   model="deliveryOption"
-                  :value="this.deliveryOption"
+                  :deliveryOption="this.deliveryOption"
                   :required="true"
                   id="deliveryOption"
                   name="delivery-option"
