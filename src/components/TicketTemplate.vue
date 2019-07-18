@@ -129,23 +129,17 @@
   }
   .booking-form-wrapper .ticket-view.label-best {
     background-position: right bottom;
-    background-size: 86px;
+    background-size: 110px;
     background-image: url(../assets/images/label-best.svg);
     background-repeat: no-repeat;
   }
 
   .booking-form-wrapper .ticket-view.label-sold {
-    background-position: right bottom;
-    background-size: 90px;
     background-image: url(../assets/images/label-sold.svg);
-    background-repeat: no-repeat;
   }
 
   .booking-form-wrapper .ticket-view.label-close {
-    background-position: right bottom;
-    background-size: 90px;
     background-image: url(../assets/images/label-close.svg);
-    background-repeat: no-repeat;
   }
 
   .booking-form-wrapper .ticket-view .left-decor:before {
@@ -167,6 +161,8 @@
   }  
   .smart .booking-form-wrapper .ticket-view.label-sold,
   .smart .booking-form-wrapper .ticket-view.label-close {
-    background-size: 150px;
+    background-size: 135px;
+    background-position: right bottom;
+    background-repeat: no-repeat;
   }
 </style>

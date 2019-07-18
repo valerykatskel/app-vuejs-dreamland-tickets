@@ -197,11 +197,6 @@ body {
   margin: 0 auto 0 auto;
 }
 
-.booking-form-wrapper .ticket-view.ticket-icon-03 .ticket-content .ticket-description {
-  width: 100%;
-  display: inline-block;
-}
-
 .booking-form-wrapper .ticket-view .ticket-content .ticket-title {
   font-size: 25px;
   font-weight: bold;
@@ -722,7 +717,7 @@ body {
 
 .smart .booking-form-wrapper .ticket-view .ticket-content .ticket-description{
   font-size: 18px;
-  max-width: 385px;
+  max-width: 380px;
   width: auto;
   margin-top: 16px;
   margin-bottom: 90px;
