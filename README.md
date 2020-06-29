@@ -1,6 +1,6 @@
 # app-dreamland-tickets
 
-> Форма покупки билетов для аквапарка
+> A form for buying the tickets in Dreamland aquapark
 
 ## Разработка
 
